@@ -1,9 +1,37 @@
 'use strict'
 
 var express = require('express');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+
+var passport = require('passport');
+
 var app = express();
 
+app.use(bodyParser.json());
+
 app.use(express.static(__dirname + '/build'));
+
+mongoose.connect(process.env.MONGO_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/mymeetings_development');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('db connected');
+})
+
+app.set('jwtSecret', process.env.JWT_secret || 'getanewone');
+
+app.use(passport.initialize());
+
+// require('./lib/passport')(passport);
+// var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
+
+// var eventsRouter = express.Router();
+// eventsRouter.use(jwtauth);
+
+// require('./routes/users_routes')(app, jwtauth);
+// require('./routes/event_routes')(eventsRouter);
+// app.use('/', eventsRouter);
 
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {
