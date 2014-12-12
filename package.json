@@ -1,0 +1,22 @@
+{
+  "name": "Activity-Calendar",
+  "version": "1.0.0",
+  "description": "Activity-Calendar =================",
+  "main": "server.js",
+  "scripts": {
+    "test": "grunt --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cicero-vote/Activity-Calendar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cicero-vote/Activity-Calendar/issues"
+  },
+  "homepage": "https://github.com/Cicero-vote/Activity-Calendar",
+  "dependencies": {
+    "express": "^4.10.4"
+  }
+}
