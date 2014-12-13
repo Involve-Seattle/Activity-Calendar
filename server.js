@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var express = require('express');
 var mongoose = require('mongoose');
@@ -17,20 +17,20 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('db connected');
-})
+});
 
 app.set('jwtSecret', process.env.JWT_secret || 'getanewone');
 
 app.use(passport.initialize());
-
+//
 // require('./lib/passport')(passport);
 // var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 
 // var eventsRouter = express.Router();
 // eventsRouter.use(jwtauth);
 
-// require('./routes/users_routes')(app, jwtauth);
-// require('./routes/event_routes')(eventsRouter);
+require('./routes/user_routes')(app);
+// require('./routes/mymeets_routes')(app);
 // app.use('/', eventsRouter);
 
 app.set('port', process.env.PORT || 3000);
