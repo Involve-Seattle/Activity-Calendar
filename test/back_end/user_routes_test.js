@@ -13,18 +13,18 @@ var email = new Buffer('test@example.com', 'ascii').toString('base64');
 var password = new Buffer('testtest', 'ascii').toString('base64');
 
 before(function(done) {
-    User.remove({}, function(err) {
-      if (err) return console.log(err + ' dusting');
-      console.log('db cleared');
-    });
-    done();
+  User.remove({}, function(err) {
+    if (err) return console.log(err + ' dusting');
+    console.log('db cleared');
+  });
+  done();
   });
 
-  after(function(done) {
-    User.remove({}, function(err) {
-      if (err) return console.log(err + ' dusting');
-      console.log('db cleared');
-    });
+after(function(done) {
+  User.remove({}, function(err) {
+    if (err) return console.log(err + ' dusting');
+    console.log('db cleared');
+  });
   done();
 });
 

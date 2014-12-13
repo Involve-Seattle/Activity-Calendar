@@ -6,7 +6,6 @@ var decode = require('../lib/decode');
 module.exports = function(app) {
   app.post('/api/newUser', function(req, res) {
     var info = decode(req.body);
-    console.log(info);
     var regex = /[a-zA-Z0-9_]{5,}/;
 
     if (!regex.test(req.body.password)) return res.status(500).send('invalid password');

@@ -30,7 +30,7 @@ app.use(passport.initialize());
 // eventsRouter.use(jwtauth);
 
 require('./routes/user_routes')(app);
-// require('./routes/mymeets_routes')(app);
+require('./routes/mymeets_routes')(app);
 // app.use('/', eventsRouter);
 
 app.set('port', process.env.PORT || 3000);
