@@ -3,6 +3,7 @@
 module.exports = function(app) {
   app.controller('loginCtrl', ['$scope', '$http', '$cookies', '$base64', '$location', function($scope, $http, $cookies, $base64, $location) {
     $scope.errors = [];
+
     $scope.login = function() {
       $scope.errors = [];
       $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode($scope.user.email + ':' + $scope.user.password);

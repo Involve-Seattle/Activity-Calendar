@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 
     copy: {
       dev: {
-        cwd: 'public/',
+        cwd: 'app/',
         src: ['**/*.html', '**/*.css'],
         expand: true,
         dest: 'build/'
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 
     browserify: {
       dev: {
-        src: ['public/*.js'],
+        src: ['app/js/**/*.js'],
         dest: 'build/bundle.js',
         options: {
           transform: ['debowerify']

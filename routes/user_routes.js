@@ -20,6 +20,10 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/', function(req, res) {
+    res.sendFile('../app/index.html');
+  });
+
   app.get('/api/login', function(req, res) {
     var info = decode(req.headers);
 
