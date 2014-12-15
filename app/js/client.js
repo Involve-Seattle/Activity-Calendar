@@ -10,7 +10,7 @@ var involveApp = angular.module('involveApp', ['ngRoute', 'ngCookies', 'base64']
 // require('./services/resource_backend_service')(involveApp);
 
 //controllers
-require('./controllers/login_controller.js')(involveApp);
+require('./user/controllers/login_controller.js')(involveApp);
 
 involveApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
