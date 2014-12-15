@@ -7,8 +7,8 @@ var myMeetSchema = mongoose.Schema({
 
   userName: String,
   myMeetTitle: String,
-  myMeetLocation: String,
-  myMeetTime: Date,
+  myMeetAddress: String,
+  myMeetTime: String,
   invitees: [
   {
     name: String,
@@ -17,4 +17,4 @@ var myMeetSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('MyMeeting', myMeetSchema);
+module.exports = mongoose.model('MyMeet', myMeetSchema);
