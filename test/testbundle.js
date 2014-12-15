@@ -29858,7 +29858,6 @@ describe('resource service', function() {
     $controllerConstructor = $controller;
   }));
 
-console.log('hullo');
   it('should be able to create a controller', function() {
     var loginController = $controllerConstructor('loginCtrl', {$scope: $scope});
     expect(typeof loginController).toBe('object');
