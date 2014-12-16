@@ -20,7 +20,7 @@ involveApp.config(['$routeProvider', function($routeProvider) {
     controller: 'loginCtrl'
   })
   .when('/calendar', {
-    templateUrl: 'templates/events/directives/viewEvent.html',
+    templateUrl: 'templates/events/calendar_template.html',
     controller: 'calendCtrl'
   })
   .otherwise({

@@ -21,7 +21,7 @@ involveApp.config(['$routeProvider', function($routeProvider) {
     controller: 'loginCtrl'
   })
   .when('/calendar', {
-    templateUrl: 'templates/events/directives/viewEvent.html',
+    templateUrl: 'templates/events/calendar_template.html',
     controller: 'calendCtrl'
   })
   .otherwise({
@@ -35,18 +35,19 @@ involveApp.config(['$routeProvider', function($routeProvider) {
 module.exports = function(app) {
   app.controller('calendCtrl', ['$scope', '$http', '$cookies', 'ResourceBackend', function($scope, $http, ResourceAuth, ResourceBackend, $cookies) {
     var calBackend = new ResourceBackend('events');
-    var auth = new ResourceAuth();
-
+    // var auth = new ResourceAuth();
+    console.log($cookies);
     // auth.signedIn($cookies);
 
     // $http.defaults.headers.common['jwt'] = $cookies.jwt;
 
     $scope.index = function() {
-      auth.signedIn($cookies);
-      calBackend.index()
-      .success(function(data) {
-        $scope.events = data;
-      });
+      // auth.signedIn($cookies);
+      $scope.events = [{title: 'meeting', location: 'location', date: 'date'}];
+      calBackend.index();
+      // .success(function(data) {
+      //   console.log(data);
+      // });
     };
   }]);
 };
