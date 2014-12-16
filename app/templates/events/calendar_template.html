@@ -1,10 +1,33 @@
-<div data-ng-controller="calendCtrl" data-ng-init="index()">
+<DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Calendar</title>
+</head>
+<body>
+  <header>
+    <img src="#">
+    <div class="navbar">
+      <nav class="responsive-menu">
+        <ul>
+          <li ng-click="FUNCTIONGOESHERE!!!"><a href="index.html">Calendar</a></li>
+          <li ng-click="FUNCTIONGOESHERE!!!"><a href="favorites.html">Favorites</a></li>
+          <li ng-click="FUNCTIONGOESHERE!!!">Logout</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <div data-ng-repeat="event in events">
-    <div data-ng-click="viewLarge(event)">
-      <p>{{event.title}}</p>
-      <p>{{event.location}}</p>
-      <p>{{event.date}}</p>
+  <div data-ng-controller="calendCtrl" data-ng-init="index()">
+    <div data-ng-repeat="event in events">
+      <div data-ng-click="viewLarge(event)">
+        <p>{{event.title}}</p>
+        <p>{{event.location}}</p>
+        <p>{{event.date}}</p>
+      </div>
     </div>
   </div>
-</div>
+  <footer>
+  </footer>
+</body>
+</html>
