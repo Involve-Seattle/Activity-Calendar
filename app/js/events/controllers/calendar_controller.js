@@ -11,11 +11,12 @@ module.exports = function(app) {
 
     $scope.index = function() {
       // auth.signedIn($cookies);
-      $scope.events = [{title: 'meeting', location: 'location', date: 'date'}];
-      calBackend.index();
-      // .success(function(data) {
-      //   console.log(data);
-      // });
+      calBackend.index()
+      .success(function(data) {
+        $scope.events = data;
+        console.log(data);
+      });
     };
+
   }]);
 };

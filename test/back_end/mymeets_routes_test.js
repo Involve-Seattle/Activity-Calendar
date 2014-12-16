@@ -51,7 +51,7 @@ describe('mymeets crud', function() {
       userName: 'testtest',
       myMeetTitle: 'Test Title',
       myMeetAddress: 'test 123 teststate, ts 12345',
-      myMeetTime: 'Data',
+      myMeetTime: 'Date',
       invitees: [
         {
           name: 'testName',
