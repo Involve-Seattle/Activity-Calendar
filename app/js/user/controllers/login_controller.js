@@ -10,7 +10,7 @@ module.exports = function(app) {
 
       $http({
         method: 'GET',
-        url: '/api/users'
+        url: '/api/login'
       })
       .success(function(data) {
         console.log('success');
