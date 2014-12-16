@@ -11,7 +11,8 @@
     "afterEach"  : false,
     "equal"      : false,
     "$"          : false,
-    "document"   : false
+    "document"   : false,
+    "angular"    : false
   },
   "globalstrict": true,
   "quotmark": false,
