@@ -17,14 +17,11 @@
       </nav>
     </div>
   </header>
-
-  <div data-ng-controller="calendCtrl" data-ng-init="index()">
-    <div data-ng-repeat="event in events">
-      <div data-ng-click="viewLarge(event)">
-        <p>{{event.title}}</p>
-        <p>{{event.location}}</p>
-        <p>{{event.date}}</p>
-      </div>
+  <div data-ng-repeat="event in events">
+    <div data-ng-click="viewLarge(event)">
+      <p>{{event.eventTitle}}</p>
+      <p>{{event.eventAddress}}</p>
+      <p>{{event.eventDate}}</p>
     </div>
   </div>
   <footer>
