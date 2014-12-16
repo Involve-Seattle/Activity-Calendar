@@ -1,0 +1,27 @@
+<div>
+  <h1>HELLO!!</h1>
+  <div data-ng-controller='loginCtrl' data-ng-init='index()'>
+    <div>
+      <button data-ng-click='user.loggingIn = !user.loggingIn; user.signingUp = false'>Log In</button>
+      <div data-ng-show='user.loggingIn'>
+        <form name='userLoginForm'>
+          <input type='text' placeholder='email' data-ng-model='user.email'>
+          <input type='password' placeholder='password' data-ng-model='user.password'>
+          <button data-ng-click='login()'>Get involved!</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <button data-ng-click='user.signingUp = !user.signingUp; user.loggingIn = false'>Sign Up</button>
+      <div data-ng-show='user.signingUp'>
+        <form name='newUserForm'>
+          <input type='text' placeholder='email' data-ng-model='newUser.email'>
+          <input type='password' placeholder='password' data-ng-model='newUser.password'>
+          <input type='password' placeholder='confirm password' data-ng-model='newUser.passwordConfirm'>
+          <input type='text' placeholder='city' data-ng-model='newUser.locations'>
+          <button data-ng-click='signUp()'>Get Involved!</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cicero-vote/Activity-Calendar.git"
+    "url": "https://github.com/Involve-Seattle/Activity-Calendar.git"
   },
   "author": "",
   "license": "ISC",
@@ -49,7 +49,6 @@
     "jwt-simple": "^0.2.0",
     "mongoose": "^3.8.18",
     "passport": "^0.2.1",
-    "passport-http": "^0.2.2",
-    "twilio": "^1.8.0"
+    "passport-http": "^0.2.2"
   }
 }

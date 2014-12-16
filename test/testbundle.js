@@ -94,7 +94,7 @@ module.exports = function(app) {
       .success(function(data) {
         console.log('success');
         $cookies.jwt = data.jwt;
-        $location.path('/notes');
+        $location.path('/calendar');
       })
       .error(function(data) {
         console.log('error!');
@@ -109,9 +109,9 @@ module.exports = function(app) {
       if (!$scope.newUser.email) $scope.errors.push({msg: 'did note specify a email'});
 
       if ($scope.errors.length) return;
-      $scope.newUser.email = $base64.encode($scope.newUser.email);
-      $scope.newUser.password = $base64.encode($scope.newUser.password);
-      $scope.newUser.group = $base64.encode($scope.newUser.group);
+      // $scope.newUser.email = $base64.encode($scope.newUser.email);
+      // $scope.newUser.password = $base64.encode($scope.newUser.password);
+      // $scope.newUser.group = $base64.encode($scope.newUser.group);
 
       $http({
         method: 'POST',
@@ -121,9 +121,10 @@ module.exports = function(app) {
       .success(function(data) {
         console.log('success!');
         $cookies.jwt = data.jwt;
-        $location.path('/notes');
+        $location.path('/calendar');
       })
       .error(function(data) {
+        console.log('error!');
         console.log(data);
         $scope.errors.push(data);
       });
