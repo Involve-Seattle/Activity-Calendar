@@ -45,7 +45,7 @@ module.exports = function(app) {
         $location.path('/calendar');
       })
       .error(function(data) {
-        console.log('error!')
+        console.log('error!');
         console.log(data);
         $scope.errors.push(data);
       });
