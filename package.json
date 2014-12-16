@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Cicero-vote/Activity-Calendar/issues"
+    "url": "https://github.com/Involve-Seattle/Activity-Calendar/issues"
   },
-  "homepage": "https://github.com/Cicero-vote/Activity-Calendar",
+  "homepage": "https://github.com/Involve-Seattle/Activity-Calendar",
   "devDependencies": {
     "chai": "^1.9.2",
     "chai-http": "^1.0.0",
