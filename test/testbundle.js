@@ -8,10 +8,11 @@ require("./../../bower_components/angular-base64/angular-base64.js");
 var involveApp = angular.module('involveApp', ['ngRoute', 'ngCookies', 'base64']);
 
 //services
-// require('./services/resource_backend_service')(involveApp);
+require('./events/services/resource_backend_service')(involveApp);
 
 //controllers
 require('./user/controllers/login_controller.js')(involveApp);
+require('./events/controllers/calendar_controller.js')(involveApp);
 
 involveApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -19,12 +20,61 @@ involveApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'templates/login_template.html',
     controller: 'loginCtrl'
   })
+  .when('/calendar', {
+    templateUrl: 'templates/events/directives/viewEvent.html',
+    controller: 'calendCtrl'
+  })
   .otherwise({
     redirectTo: '/template'
   });
 }]);
 
-},{"./../../bower_components/angular-base64/angular-base64.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./user/controllers/login_controller.js":2}],2:[function(require,module,exports){
+},{"./../../bower_components/angular-base64/angular-base64.js":5,"./../../bower_components/angular-cookies/angular-cookies.js":6,"./../../bower_components/angular-route/angular-route.js":8,"./../../bower_components/angular/angular":9,"./events/controllers/calendar_controller.js":2,"./events/services/resource_backend_service":3,"./user/controllers/login_controller.js":4}],2:[function(require,module,exports){
+'use strict';
+
+module.exports = function(app) {
+  app.controller('calendCtrl', ['$scope', '$http', '$cookies', 'ResourceBackend', function($scope, $http, ResourceAuth, ResourceBackend, $cookies) {
+    var calBackend = new ResourceBackend('events');
+    var auth = new ResourceAuth();
+
+    // auth.signedIn($cookies);
+
+    // $http.defaults.headers.common['jwt'] = $cookies.jwt;
+
+    $scope.index = function() {
+      auth.signedIn($cookies);
+      calBackend.index()
+      .success(function(data) {
+        $scope.events = data;
+      });
+    };
+  }]);
+};
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+module.exports = function(app) {
+  var handleErrors = function(data) {
+    console.log(data);
+  };
+
+  app.factory('ResourceBackend', ['$http', function($http) {
+    return function(resourceName) {
+      return {
+        index: function() {
+          return $http({
+            method: 'GET',
+            url: '/api/' + resourceName
+          })
+          .error(handleErrors);
+        }
+      };
+    };
+  }]);
+};
+
+},{}],4:[function(require,module,exports){
 'use strict';
 
 module.exports = function(app) {
@@ -79,7 +129,7 @@ module.exports = function(app) {
   }]);
 };
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function() {
     'use strict';
 
@@ -247,7 +297,7 @@ module.exports = function(app) {
 
 })();
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.6
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -455,7 +505,7 @@ angular.module('ngCookies', ['ng']).
 
 })(window, window.angular);
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.6
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -2839,7 +2889,7 @@ if (window.jasmine || window.mocha) {
 
 })(window, window.angular);
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.6
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -3836,7 +3886,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.6
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -29837,7 +29887,43 @@ var styleDirective = valueFn({
 })(window, document);
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}</style>');
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+'use strict';
+
+require('../../app/js/client');
+require("./../../bower_components/angular-mocks/angular-mocks.js");
+
+describe('resource service', function() {
+  beforeEach(angular.mock.module('involveApp'));
+  var Service;
+  var $httpBackend;
+  var eventService;
+
+  beforeEach(angular.mock.inject(function(ResourceBackend, _$httpBackend_){
+    Service = ResourceBackend;
+    $httpBackend = _$httpBackend_;
+    eventService = new Service('events');
+  }));
+
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
+
+  it('should make a get request to notes', function() {
+    $httpBackend.expectGET('/api/events').respond(200, []);
+
+    var promise = eventService.index('events');
+
+    promise.success(function(data) {
+      expect(Array.isArray(data)).toBe(true);
+    });
+
+    $httpBackend.flush();
+  });
+});
+
+},{"../../app/js/client":1,"./../../bower_components/angular-mocks/angular-mocks.js":7}],11:[function(require,module,exports){
 'use strict';
 
 
@@ -29903,4 +29989,4 @@ describe('resource service', function() {
 });
 
 
-},{"../../app/js/client":1,"../../app/js/user/controllers/login_controller":2,"./../../bower_components/angular-mocks/angular-mocks.js":5}]},{},[8]);
+},{"../../app/js/client":1,"../../app/js/user/controllers/login_controller":4,"./../../bower_components/angular-mocks/angular-mocks.js":7}]},{},[10,11]);
