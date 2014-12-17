@@ -59,4 +59,34 @@ describe('resource service', function() {
       expect($cookies.jwt).toEqual('1');
     });
   });
+
+  describe('user error handling', function() {
+
+    beforeEach(angular.mock.inject(function(_$httpBackend_) {
+      $httpBackend = _$httpBackend_;
+      $controllerConstructor('loginCtrl', {$scope: $scope});
+    }));
+
+    afterEach(function() {
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it('returns server signup errors', function() {
+      $scope.newUser = {
+        email: 'testanother@example.com',
+        password: 'Password',
+        passwordConfirmation: 'Password'
+      };
+
+      $httpBackend.expectPOST('/api/newUser').respond(500, {msg: 'password must contain at least one number'});
+
+      $scope.signUp();
+      $httpBackend.flush();
+
+      expect($scope.errors[0].msg).toBe('password must contain at least one number');
+    });
+
+  });
+
 });
