@@ -9,6 +9,7 @@ chai.use(chaihttp);
 require('../../server');
 
 var expect = chai.expect;
+
 var email = new Buffer('test@example.com', 'ascii').toString('base64');
 var password = new Buffer('testtest', 'ascii').toString('base64');
 
@@ -45,7 +46,7 @@ describe('create and login user', function() {
       expect(err).to.eql(null);
       expect(res.body).to.have.property('jwt');
       User.findOne({email: 'test@example.com'}, function(err, user) {
-        expect(user).to.exist;
+        expect(user).to.not.eql(undefined);
         expect(user).to.have.property('locations');
         expect(user.locations[0].cityName).to.eql('testCity');
       });

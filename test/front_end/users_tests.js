@@ -1,6 +1,5 @@
 'use strict';
 
-
 require('../../app/js/client');
 require('../../app/js/user/controllers/login_controller');
 require('angular-mocks');
@@ -61,4 +60,3 @@ describe('resource service', function() {
     });
   });
 });
-
