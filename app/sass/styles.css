@@ -67,7 +67,8 @@ p {
 
 .navbar {
   float: right;
-  right: 0; }
+  right: 0;
+  position: relative; }
   .navbar ul {
     position: relative;
     list-style: none;
@@ -84,6 +85,7 @@ p {
       font-size: 1.5em; }
   .navbar:hover ul {
     margin-top: 1em;
+    width: 100%;
     left: auto;
     right: 0; }
   .navbar:hover a {
