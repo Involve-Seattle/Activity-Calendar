@@ -80,7 +80,6 @@ module.exports = function(app) {
 'use strict';
 
 module.exports = function(app) {
-  console.log('heelooooo');
   app.controller('loginCtrl', ['$scope', '$http', '$cookies', '$base64', '$location', function($scope, $http, $cookies, $base64, $location) {
     $scope.errors = [];
 
@@ -105,16 +104,14 @@ module.exports = function(app) {
     };
 
     $scope.signUp = function() {
-      console.log('Are we being called?' + $scope.newUser.email);
       $scope.errors = [];
       if ($scope.newUser.password !== $scope.newUser.passwordConfirmation) $scope.errors.push({msg: 'password and confirmation did not match'});
       if (!$scope.newUser.email) $scope.errors.push({msg: 'did note specify a email'});
-      console.log('Being called now?');
-      console.log($scope.errors);
       if ($scope.errors.length) return;
+
       $scope.newUser.email = $base64.encode($scope.newUser.email);
       $scope.newUser.password = $base64.encode($scope.newUser.password);
-      console.log('ARE WEEEEE!!!@#<MFLDNFAKLJDHV');
+
       $http({
         method: 'POST',
         url: '/api/newUser',
