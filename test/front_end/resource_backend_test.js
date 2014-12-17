@@ -9,7 +9,7 @@ describe('resource service', function() {
   var $httpBackend;
   var eventService;
 
-  beforeEach(angular.mock.inject(function(ResourceBackend, _$httpBackend_){
+  beforeEach(angular.mock.inject(function(ResourceBackend, _$httpBackend_) {
     Service = ResourceBackend;
     $httpBackend = _$httpBackend_;
     eventService = new Service('events');

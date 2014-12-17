@@ -8,6 +8,7 @@ var involveApp = angular.module('involveApp', ['ngRoute', 'ngCookies', 'base64']
 
 //services
 require('./events/services/resource_backend_service')(involveApp);
+require('./user/services/user_service')(involveApp);
 
 //controllers
 require('./user/controllers/login_controller.js')(involveApp);

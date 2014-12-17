@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     jshint: {
-      all: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js'],
+      all: ['*.js', 'app/**/*.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js', 'test/**/*.js', '!/build/**/*.js', '!test/test_bundle.js', '!test/testbundle.js'],
       options: {
         jshintrc: true,
         ignores: ['public/jquery-1.11.1.js']
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     },
 
     jscs: {
-      src: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js'],
+      src: ['*.js', 'app/**/*.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js', 'test/**/*.js', '!/build/**/*.js', '!test/test_bundle.js', '!test/testbundle.js'],
       options: {
         config: '.jscsrc'
       }

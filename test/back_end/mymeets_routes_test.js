@@ -8,7 +8,8 @@ chai.use(chaihttp);
 require('../../server');
 
 var expect = chai.expect;
-
+var email = new Buffer('testMeets@example.com', 'ascii').toString('base64');
+var password = new Buffer('testtest', 'ascii').toString('base64');
 var token;
 
 before(function(done) {
@@ -20,9 +21,9 @@ before(function(done) {
   chai.request('http://localhost:3000')
   .post('/api/newUser')
   .send({
-    email: 'test@example.com',
-    password: 'testpass',
-    passwordConfirmation: 'testpass',
+    email: email,
+    password: password,
+    passwordConfirmation: password,
     locations: [{
       cityName: 'testCity'
     }]
@@ -64,7 +65,7 @@ describe('mymeets crud', function() {
         expect(data.myMeetTitle).to.eql('Test Title');
       });
       done();
-    })
+    });
   });
 
 });

@@ -24,8 +24,8 @@ app.set('jwtSecret', process.env.JWT_secret || 'getanewone');
 
 app.use(passport.initialize());
 //
-// require('./lib/passport')(passport);
-// var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
+require('./lib/passport')(passport);
+var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 
 // var eventsRouter = express.Router();
 // eventsRouter.use(jwtauth);
