@@ -16,7 +16,7 @@ require('./events/controllers/calendar_controller.js')(involveApp);
 involveApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
   .when('/template', {
-    templateUrl: 'templates/login_template.html',
+    templateUrl: 'templates/login/login_template.html',
     controller: 'loginCtrl'
   })
   .when('/calendar', {
