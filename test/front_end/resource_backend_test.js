@@ -1,6 +1,7 @@
 'use strict';
 
 require('../../app/js/client');
+
 require('angular-mocks');
 
 describe('resource service', function() {
@@ -23,7 +24,7 @@ describe('resource service', function() {
   it('should make a get request to notes', function() {
     $httpBackend.expectGET('/api/events').respond(200, []);
 
-    var promise = eventService.index('events');
+    var promise = eventService.index();
 
     promise.success(function(data) {
       expect(Array.isArray(data)).toBe(true);

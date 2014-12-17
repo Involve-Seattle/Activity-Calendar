@@ -24,6 +24,10 @@ involveApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'templates/events/calendar_template.html',
     controller: 'calendCtrl'
   })
+  .when('/singleView', {
+    templateUrl: 'templates/events/event_template.html',
+    controller: 'calendCtrl'
+  })
   .otherwise({
     redirectTo: '/template'
   });
@@ -48,6 +52,17 @@ module.exports = function(app) {
         $scope.events = data;
         console.log(data);
       });
+    };
+
+    $scope.viewLarge = function(currentEvent) {
+      $scope.currentEvent = currentEvent;
+      $scope.show = true;
+      console.log($scope.currentEvent);
+    };
+
+    $scope.viewAll = function() {
+      $scope.show = false;
+      // console.log($location);
     };
 
   }]);
@@ -29894,6 +29909,7 @@ var styleDirective = valueFn({
 'use strict';
 
 require('../../app/js/client');
+
 require("./../../bower_components/angular-mocks/angular-mocks.js");
 
 describe('resource service', function() {
@@ -29916,7 +29932,7 @@ describe('resource service', function() {
   it('should make a get request to notes', function() {
     $httpBackend.expectGET('/api/events').respond(200, []);
 
-    var promise = eventService.index('events');
+    var promise = eventService.index();
 
     promise.success(function(data) {
       expect(Array.isArray(data)).toBe(true);

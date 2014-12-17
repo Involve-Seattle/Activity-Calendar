@@ -18,5 +18,16 @@ module.exports = function(app) {
       });
     };
 
+    $scope.viewLarge = function(currentEvent) {
+      $scope.currentEvent = currentEvent;
+      $scope.show = true;
+      console.log($scope.currentEvent);
+    };
+
+    $scope.viewAll = function() {
+      $scope.show = false;
+      // console.log($location);
+    };
+
   }]);
 };
