@@ -25,7 +25,13 @@ module.exports = function(app) {
         url: '/api/newUser',
         data: newUser
         });
+      },
+
+      logout: function($cookies) {
+        $cookies.jwt = undefined;
+        return $cookies;
       }
+
     };
 
   }]);

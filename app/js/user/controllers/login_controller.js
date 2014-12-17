@@ -8,8 +8,6 @@ module.exports = function(app) {
     $scope.login = function() {
       $scope.errors = [];
 
-      var user = $scope.user;
-
       $userService.login($scope.user)
       .success(function(data) {
         $cookies.jwt = data.jwt;
