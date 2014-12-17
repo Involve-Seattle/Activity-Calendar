@@ -8,6 +8,7 @@ var involveApp = angular.module('involveApp', ['ngRoute', 'ngCookies', 'base64']
 
 //services
 require('./events/services/resource_backend_service')(involveApp);
+require('./user/services/user_service')(involveApp);
 
 //controllers
 require('./user/controllers/login_controller.js')(involveApp);
@@ -16,7 +17,7 @@ require('./events/controllers/calendar_controller.js')(involveApp);
 involveApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
   .when('/template', {
-    templateUrl: 'templates/login_template.html',
+    templateUrl: 'templates/login/login_template.html',
     controller: 'loginCtrl'
   })
   .when('/calendar', {

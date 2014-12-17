@@ -32,7 +32,6 @@ afterEach(function() {
   });
 });
 
-
 describe('generalEvents request', function() {
 
   it('should pull events from db', function(done) {
@@ -43,7 +42,7 @@ describe('generalEvents request', function() {
       expect(err).to.eql(null);
       expect(res.body[0]).to.have.property('eventTitle');
       done();
-    })
+    });
   });
 
 });
