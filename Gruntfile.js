@@ -7,10 +7,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.initConfig({
     jshint: {
-      all: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'public/*.js'],
+      all: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js'],
       options: {
         jshintrc: true,
         ignores: ['public/jquery-1.11.1.js']
@@ -18,14 +19,14 @@ module.exports = function(grunt) {
     },
 
     jscs: {
-      src: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'public/app.js'],
+      src: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js'],
       options: {
         config: '.jscsrc'
       }
     },
 
     simplemocha: {
-      src: ['test/**/*.js']
+      src: ['test/back_end/*.js']
     },
 
     clean: {
@@ -53,17 +54,28 @@ module.exports = function(grunt) {
       },
 
       test: {
-        src: ['test/client/client_test.js'],
-        dest: 'test/test_bundle.js',
+        src: ['test/front_end/*.js'],
+        dest: 'test/testbundle.js',
         options: {
           transform: ['debowerify']
         }
       }
+    },
+
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
+      },
+      continuous: {
+        configFile: 'karma.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS']
+      }
     }
   });
 
-  grunt.registerTask('build:test', ['browserify:test']);
   grunt.registerTask('build:dev', ['clean:dev', 'browserify:dev', 'copy:dev']);
-  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
+  grunt.registerTask('test:client', ['browserify:test', 'karma:unit']);
+  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', 'test:client']);
   grunt.registerTask('default', ['test', 'build:dev']);
 };

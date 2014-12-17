@@ -1,0 +1,10 @@
+<div data-ng-controller="calendCtrl" data-ng-init="index()">
+
+  <div data-ng-repeat="event in events">
+    <div data-ng-click="viewLarge(event)">
+      <p>{{event.eventTitle}}</p>
+      <p>{{event.eventAddress}}</p>
+      <p>{{event.eventDate}}</p>
+    </div>
+  </div>
+</div>

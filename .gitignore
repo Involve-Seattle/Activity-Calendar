@@ -24,6 +24,7 @@ build/release
 
 # dev artifacts (production goes in dist)
 build/
+test/testbundle.js
 
 # bower
 bower_components/

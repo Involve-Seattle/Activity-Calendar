@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cicero-vote/Activity-Calendar.git"
+    "url": "https://github.com/Involve-Seattle/Activity-Calendar.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Cicero-vote/Activity-Calendar/issues"
+    "url": "https://github.com/Involve-Seattle/Activity-Calendar/issues"
   },
-  "homepage": "https://github.com/Cicero-vote/Activity-Calendar",
+  "homepage": "https://github.com/Involve-Seattle/Activity-Calendar",
   "devDependencies": {
     "chai": "^1.9.2",
     "chai-http": "^1.0.0",
@@ -45,10 +45,10 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.9.2",
     "express": "^4.10.1",
+    "google-feed-api": "0.0.2",
     "jwt-simple": "^0.2.0",
     "mongoose": "^3.8.18",
     "passport": "^0.2.1",
-    "passport-http": "^0.2.2",
-    "twilio": "^1.8.0"
+    "passport-http": "^0.2.2"
   }
 }
