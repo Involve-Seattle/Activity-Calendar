@@ -7,10 +7,35 @@
 
 .navbar
   float: right
-  top: 0
   right: 0
-  margin: 0
-  padding: 0
+  ul
+    position: relative
+    list-style: none
+    left: -9999px
+    li
+      padding: 0.6em
+      float:none
+      background-color: $color-tertiary--1
+      border-bottom: 0.3em solid $color-secondary--2
+    a
+      white-space: nowrap
+      font-family: $font-family--body
+      color: $color-default--2
+      background-color: $color-tertiary--1
+      font-size: 1.5em
+  &:hover ul
+    margin-top: 1em
+    left: auto
+    right: 0
+    // margin-right: -5em
+  &:hover a
+    text-decoration: none
+  &:hover ul a
+    text-decoration: none
+  &:hover ul li:hover
+    background-color: $color-primary--7
+  &:hover ul li:hover a
+    background-color: $color-primary--7
 
 .logo
   width: 8em

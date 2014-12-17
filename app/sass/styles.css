@@ -67,10 +67,33 @@ p {
 
 .navbar {
   float: right;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0; }
+  right: 0; }
+  .navbar ul {
+    position: relative;
+    list-style: none;
+    left: -9999px; }
+    .navbar ul li {
+      padding: 0.6em;
+      background-color: #fffbf2;
+      border-bottom: 0.3em solid #af2424; }
+    .navbar ul a {
+      white-space: nowrap;
+      font-family: "Kreon", serif;
+      color: gray;
+      background-color: #fffbf2;
+      font-size: 1.5em; }
+  .navbar:hover ul {
+    margin-top: 1em;
+    left: auto;
+    right: 0; }
+  .navbar:hover a {
+    text-decoration: none; }
+  .navbar:hover ul a {
+    text-decoration: none; }
+  .navbar:hover ul li:hover {
+    background-color: #bcd9e3; }
+  .navbar:hover ul li:hover a {
+    background-color: #bcd9e3; }
 
 .logo {
   width: 8em;
