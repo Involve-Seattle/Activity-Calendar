@@ -28,11 +28,10 @@ module.exports = function(app) {
       $scope.errors = [];
       if ($scope.newUser.password !== $scope.newUser.passwordConfirmation) $scope.errors.push({msg: 'password and confirmation did not match'});
       if (!$scope.newUser.email) $scope.errors.push({msg: 'did note specify a email'});
-
       if ($scope.errors.length) return;
-      // $scope.newUser.email = $base64.encode($scope.newUser.email);
-      // $scope.newUser.password = $base64.encode($scope.newUser.password);
-      // $scope.newUser.group = $base64.encode($scope.newUser.group);
+
+      $scope.newUser.email = $base64.encode($scope.newUser.email);
+      $scope.newUser.password = $base64.encode($scope.newUser.password);
 
       $http({
         method: 'POST',

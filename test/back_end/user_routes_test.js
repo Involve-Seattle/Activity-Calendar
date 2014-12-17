@@ -18,7 +18,7 @@ before(function(done) {
     console.log('db cleared');
   });
   done();
-  });
+});
 
 after(function(done) {
   User.remove({}, function(err) {
@@ -64,6 +64,6 @@ describe('create and login user', function() {
       expect(err).to.eql(null);
       expect(res.body).to.have.property('jwt');
       done();
-    })
-  })
+    });
+  });
 });
