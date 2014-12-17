@@ -3,6 +3,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+require('./lib/getRssFeed')();
 
 var passport = require('passport');
 
@@ -23,13 +24,14 @@ app.set('jwtSecret', process.env.JWT_secret || 'getanewone');
 
 app.use(passport.initialize());
 //
-// require('./lib/passport')(passport);
-// var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
+require('./lib/passport')(passport);
+var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 
 // var eventsRouter = express.Router();
 // eventsRouter.use(jwtauth);
 
 require('./routes/user_routes')(app);
+require('./routes/generalEvents_routes')(app);
 require('./routes/mymeets_routes')(app);
 // app.use('/', eventsRouter);
 

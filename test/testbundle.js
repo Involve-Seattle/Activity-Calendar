@@ -9,6 +9,7 @@ var involveApp = angular.module('involveApp', ['ngRoute', 'ngCookies', 'base64']
 
 //services
 require('./events/services/resource_backend_service')(involveApp);
+require('./user/services/user_service')(involveApp);
 
 //controllers
 require('./user/controllers/login_controller.js')(involveApp);
@@ -17,11 +18,15 @@ require('./events/controllers/calendar_controller.js')(involveApp);
 involveApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
   .when('/template', {
-    templateUrl: 'templates/login_template.html',
+    templateUrl: 'templates/login/login_template.html',
     controller: 'loginCtrl'
   })
   .when('/calendar', {
     templateUrl: 'templates/events/calendar_template.html',
+    controller: 'calendCtrl'
+  })
+  .when('/singleView', {
+    templateUrl: 'templates/events/event_template.html',
     controller: 'calendCtrl'
   })
   .otherwise({
@@ -29,7 +34,7 @@ involveApp.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-},{"./../../bower_components/angular-base64/angular-base64.js":5,"./../../bower_components/angular-cookies/angular-cookies.js":6,"./../../bower_components/angular-route/angular-route.js":8,"./../../bower_components/angular/angular":9,"./events/controllers/calendar_controller.js":2,"./events/services/resource_backend_service":3,"./user/controllers/login_controller.js":4}],2:[function(require,module,exports){
+},{"./../../bower_components/angular-base64/angular-base64.js":6,"./../../bower_components/angular-cookies/angular-cookies.js":7,"./../../bower_components/angular-route/angular-route.js":9,"./../../bower_components/angular/angular":10,"./events/controllers/calendar_controller.js":2,"./events/services/resource_backend_service":3,"./user/controllers/login_controller.js":4,"./user/services/user_service":5}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = function(app) {
@@ -43,12 +48,24 @@ module.exports = function(app) {
 
     $scope.index = function() {
       // auth.signedIn($cookies);
-      $scope.events = [{title: 'meeting', location: 'location', date: 'date'}];
-      calBackend.index();
-      // .success(function(data) {
-      //   console.log(data);
-      // });
+      calBackend.index()
+      .success(function(data) {
+        $scope.events = data;
+        console.log(data);
+      });
     };
+
+    $scope.viewLarge = function(currentEvent) {
+      $scope.currentEvent = currentEvent;
+      $scope.show = true;
+      console.log($scope.currentEvent);
+    };
+
+    $scope.viewAll = function() {
+      $scope.show = false;
+      // console.log($location);
+    };
+
   }]);
 };
 
@@ -79,52 +96,33 @@ module.exports = function(app) {
 'use strict';
 
 module.exports = function(app) {
-  app.controller('loginCtrl', ['$scope', '$http', '$cookies', '$base64', '$location', function($scope, $http, $cookies, $base64, $location) {
+  app.controller('loginCtrl', ['$scope', '$http', '$cookies', '$base64', '$location', 'userService', function($scope, $http, $cookies, $base64, $location, $userService) {
+
     $scope.errors = [];
 
     $scope.login = function() {
       $scope.errors = [];
-      $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode($scope.user.email + ':' + $scope.user.password);
 
-      $http({
-        method: 'GET',
-        url: '/api/login'
-      })
+      $userService.login($scope.user)
       .success(function(data) {
-        console.log('success');
         $cookies.jwt = data.jwt;
         $location.path('/calendar');
       })
       .error(function(data) {
-        console.log('error!');
-        console.log(data);
         $scope.errors.push(data);
       });
     };
 
     $scope.signUp = function() {
       $scope.errors = [];
-      if ($scope.newUser.password !== $scope.newUser.passwordConfirmation) $scope.errors.push({msg: 'password and confirmation did not match'});
-      if (!$scope.newUser.email) $scope.errors.push({msg: 'did note specify a email'});
+      var newUser = $scope.newUser;
 
-      if ($scope.errors.length) return;
-      // $scope.newUser.email = $base64.encode($scope.newUser.email);
-      // $scope.newUser.password = $base64.encode($scope.newUser.password);
-      // $scope.newUser.group = $base64.encode($scope.newUser.group);
-
-      $http({
-        method: 'POST',
-        url: '/api/newUser',
-        data: $scope.newUser
-      })
+      $userService.signUp($scope.newUser)
       .success(function(data) {
-        console.log('success!');
         $cookies.jwt = data.jwt;
         $location.path('/calendar');
       })
       .error(function(data) {
-        console.log('error!');
-        console.log(data);
         $scope.errors.push(data);
       });
     };
@@ -132,6 +130,44 @@ module.exports = function(app) {
 };
 
 },{}],5:[function(require,module,exports){
+'use strict';
+
+module.exports = function(app) {
+  app.factory('userService', ['$http', '$cookies', '$base64', '$location', function($http, $cookies, $base64, $location) {
+    return {
+      login: function(user) {
+        $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(user.email + ':' + user.password); //jshint ignore:line
+
+        return $http({
+          method: 'GET',
+          url: '/api/login',
+          data: user
+        });
+      },
+
+      signUp: function(newUser) {
+        if (newUser.password !== newUser.passwordConfirmation) return ({msg: 'password and confirmation did not match'});
+        if (!newUser.email) return ({msg: 'did not specify an email'});
+        newUser.email = $base64.encode(newUser.email);
+        newUser.password = $base64.encode(newUser.password);
+        return $http({
+          method: 'POST',
+          url: '/api/newUser',
+          data: newUser
+        });
+      },
+
+      logout: function($cookies) {
+        $cookies.jwt = undefined;
+        return $cookies;
+      }
+
+    };
+
+  }]);
+};
+
+},{}],6:[function(require,module,exports){
 (function() {
     'use strict';
 
@@ -299,7 +335,7 @@ module.exports = function(app) {
 
 })();
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.7
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -507,7 +543,7 @@ angular.module('ngCookies', ['ng']).
 
 })(window, window.angular);
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.7
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -2891,7 +2927,7 @@ if (window.jasmine || window.mocha) {
 
 })(window, window.angular);
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.7
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -3888,7 +3924,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.7
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -29926,10 +29962,11 @@ var styleDirective = valueFn({
 })(window, document);
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}</style>');
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 require('../../app/js/client');
+
 require("./../../bower_components/angular-mocks/angular-mocks.js");
 
 describe('resource service', function() {
@@ -29938,7 +29975,7 @@ describe('resource service', function() {
   var $httpBackend;
   var eventService;
 
-  beforeEach(angular.mock.inject(function(ResourceBackend, _$httpBackend_){
+  beforeEach(angular.mock.inject(function(ResourceBackend, _$httpBackend_) {
     Service = ResourceBackend;
     $httpBackend = _$httpBackend_;
     eventService = new Service('events');
@@ -29952,7 +29989,7 @@ describe('resource service', function() {
   it('should make a get request to notes', function() {
     $httpBackend.expectGET('/api/events').respond(200, []);
 
-    var promise = eventService.index('events');
+    var promise = eventService.index();
 
     promise.success(function(data) {
       expect(Array.isArray(data)).toBe(true);
@@ -29962,9 +29999,8 @@ describe('resource service', function() {
   });
 });
 
-},{"../../app/js/client":1,"./../../bower_components/angular-mocks/angular-mocks.js":7}],11:[function(require,module,exports){
+},{"../../app/js/client":1,"./../../bower_components/angular-mocks/angular-mocks.js":8}],12:[function(require,module,exports){
 'use strict';
-
 
 require('../../app/js/client');
 require('../../app/js/user/controllers/login_controller');
@@ -30025,7 +30061,36 @@ describe('resource service', function() {
       expect($cookies.jwt).toEqual('1');
     });
   });
+
+  describe('user error handling', function() {
+
+    beforeEach(angular.mock.inject(function(_$httpBackend_) {
+      $httpBackend = _$httpBackend_;
+      $controllerConstructor('loginCtrl', {$scope: $scope});
+    }));
+
+    afterEach(function() {
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it('returns server signup errors', function() {
+      $scope.newUser = {
+        email: 'testanother@example.com',
+        password: 'Password',
+        passwordConfirmation: 'Password'
+      };
+
+      $httpBackend.expectPOST('/api/newUser').respond(500, {msg: 'password must contain at least one number'});
+
+      $scope.signUp();
+      $httpBackend.flush();
+
+      expect($scope.errors[0].msg).toBe('password must contain at least one number');
+    });
+
+  });
+
 });
 
-
-},{"../../app/js/client":1,"../../app/js/user/controllers/login_controller":4,"./../../bower_components/angular-mocks/angular-mocks.js":7}]},{},[10,11]);
+},{"../../app/js/client":1,"../../app/js/user/controllers/login_controller":4,"./../../bower_components/angular-mocks/angular-mocks.js":8}]},{},[11,12]);

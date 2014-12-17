@@ -7,11 +7,7 @@ var jwt = require('jwt-simple');
 var userSchema = mongoose.Schema({
   email: String,
   password: String,
-  locations: [
-  {
-    cityName: String
-
-  }]
+  locations: String
 });
 
 userSchema.methods.generateHash = function(password) {

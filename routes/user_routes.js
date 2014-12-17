@@ -8,14 +8,17 @@ module.exports = function(app) {
     var info = decode(req.body);
     var regex = /[a-zA-Z0-9_]{5,}/;
 
-    if (!regex.test(req.body.password)) return res.status(500).send('invalid password');
+    if (!regex.test(req.body.password)) return res.status(504).send('invalid password');
 
     var newUser = new User();
     newUser.email = info.email;
     newUser.password = info.password;
     newUser.locations = req.body.locations;
     newUser.save(function(err) {
-      if (err) return res.status(500).send('server error');
+      if (err) {
+        console.log(err);
+        return res.status(500).send('server error yo');
+      }
       res.json({jwt: newUser.generateToken(app.get('jwtSecret'))});
     });
   });
