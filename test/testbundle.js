@@ -24,6 +24,10 @@ involveApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'templates/events/calendar_template.html',
     controller: 'calendCtrl'
   })
+  .when('/singleView', {
+    templateUrl: 'templates/events/event_template.html',
+    controller: 'calendCtrl'
+  })
   .otherwise({
     redirectTo: '/template'
   });
@@ -48,6 +52,17 @@ module.exports = function(app) {
         $scope.events = data;
         console.log(data);
       });
+    };
+
+    $scope.viewLarge = function(currentEvent) {
+      $scope.currentEvent = currentEvent;
+      $scope.show = true;
+      console.log($scope.currentEvent);
+    };
+
+    $scope.viewAll = function() {
+      $scope.show = false;
+      // console.log($location);
     };
 
   }]);

@@ -6,8 +6,10 @@ var mongoose = require('mongoose');
 var genEventSchema = mongoose.Schema({
 
   eventTitle: String,
-  eventAddress: String,
-  eventDate: String
+  eventContentLong: String,
+  eventDate: String,
+  eventUrl: String,
+  eventContent: String
 
 });
 
