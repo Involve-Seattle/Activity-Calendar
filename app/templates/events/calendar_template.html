@@ -1,10 +1,19 @@
 <div data-ng-controller="calendCtrl" data-ng-init="index()">
-
   <div data-ng-repeat="event in events">
     <div data-ng-click="viewLarge(event)">
       <p>{{event.eventTitle}}</p>
       <p>{{event.eventAddress}}</p>
       <p>{{event.eventDate}}</p>
+      <div>
+        <button data-ng-click='inviteFriend = !inviteFriend'>Invite a Friend!</button>
+        <div data-ng-show='inviteFriend'>
+          <form name='invitationForm'>
+            <input type='text' placeholder='friends email' ng-model='user.friendEmail'>
+            <input type='text' placeholder='message' ng-model='user.friendMessage'>
+            <button data-ng-click='inviteFriend(); inviteFriend = false'>Send Invitation</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

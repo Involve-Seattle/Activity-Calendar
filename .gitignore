@@ -89,3 +89,6 @@ com_crashlytics_export_strings.xml
 
 .sass-cache/test/testbundle.js
 .sass-cache/
+/data
+/build
+/test/testbundle.js
