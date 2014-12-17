@@ -1,10 +1,27 @@
 <div data-ng-controller="calendCtrl" data-ng-init="index()">
 
   <div data-ng-repeat="event in events">
-    <div data-ng-click="viewLarge(event)">
-      <p>{{event.eventTitle}}</p>
-      <p>{{event.eventAddress}}</p>
-      <p>{{event.eventDate}}</p>
+    <div>
+      <div data-ng-click="viewLarge(event)" data-ng-hide='show'>
+        <!-- <button data-ng-click="viewLarge(event)";></button> -->
+        <p>{{event.eventTitle}}</p>
+        <!-- <p>{{event.eventContent}}</p> -->
+        <!-- <p>{{event.eventContentLong}}</p> -->
+        <a href={{event.eventUrl}}>Calendar Listing</a>
+      </div>
     </div>
   </div>
-</div>
+
+  <div data-ng-click="viewAll()" data-ng-show='show'>
+    <p>{{currentEvent.eventTitle}}</p>
+    <!-- <p>{{event.eventContent}}</p> -->
+    <!-- <p>{{event.eventContentLong}}</p> -->
+    <a href={{currentEvent.eventUrl}}>newListing</a>
+    <h1>Address</h1>
+    <p>Council Chambers</p>
+    <p>Seattle City Hall Floor</p>
+    <p>2600 Fourth Avenue</p>
+    <p>Seattle, WA</p>
+    <p>{{event.eventDate}}</p>
+  </div>
+

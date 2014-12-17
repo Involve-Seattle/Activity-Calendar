@@ -24,6 +24,10 @@ involveApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'templates/events/calendar_template.html',
     controller: 'calendCtrl'
   })
+  .when('/singleView', {
+    templateUrl: 'templates/events/event_template.html',
+    controller: 'calendCtrl'
+  })
   .otherwise({
     redirectTo: '/template'
   });
