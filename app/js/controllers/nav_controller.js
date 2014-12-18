@@ -2,8 +2,14 @@
 
 module.exports = function(app) {
   app.controller('navCtrl', ['$scope', '$http', '$cookies', '$location', '$rootScope', 'userService', function($scope, $http, $cookies, $location, $rootScope, userService) {
-
-    $scope.loggedIn = false;
+    console.log($scope.loggedIn);
+    if (!$cookies.jwt || !$cookies.jwt.length) {
+      console.log('whhatt?!');
+      $scope.loggedIn = false;
+    } else {
+      $scope.loggedIn = true;
+    }
+    console.log($scope.loggedIn);
 
     $scope.$on('user:loggedIn', function(event, data) {
       $scope.loggedIn = true;
@@ -22,9 +28,7 @@ module.exports = function(app) {
     };
 
     $scope.logout = function() {
-      $location.path('/login');
       userService.logout();
-
     };
 
   }]);

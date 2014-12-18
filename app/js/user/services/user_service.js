@@ -48,17 +48,17 @@ module.exports = function(app) {
       signedIn: function($cookies) {
         if (!$cookies.jwt || !$cookies.jwt.length) return $location.path('/login');
         // console.log('user logged in');
-        // $location.path('/calendar');
+        $location.path('/calendar');
       },
 
       logout: function() {
-        $cookies.jwt = undefined;
+        delete $cookies.jwt;
         $rootScope.user = {
           email: null,
           loggedin: false
         };
         $rootScope.$broadcast('user:loggedOut');
-        return $cookies;
+        return $location.path('/login');
       }
 
     };

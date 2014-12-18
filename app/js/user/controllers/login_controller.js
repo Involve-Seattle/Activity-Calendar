@@ -26,6 +26,7 @@ module.exports = function(app) {
       if (!newUser.email) return ({msg: 'did not specify an email'});
       if (!newUser.password) return ({msg: 'did not specify a password'});
 
+      console.log('hullo');
       if ($scope.errors.length) return;
 
       userService.signUp($scope.newUser)
