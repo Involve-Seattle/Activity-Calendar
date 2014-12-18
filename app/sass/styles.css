@@ -65,15 +65,14 @@ p {
 .responsive-menu {
   float: right;
   right: 0;
-  position: absolute; }
+  position: relative; }
   .responsive-menu ul {
-    position: relative;
-    /* absolute? */
+    position: absolute;
     list-style: none;
     left: -9999px;
     /* Hide off-screen when not needed (this is more accessible than display:none;) */ }
     .responsive-menu ul li {
-      padding: 0.6em;
+      padding: 0.8em 0.8em 0.8em 4em;
       float: none;
       background-color: #fffbf2;
       border-bottom: 0.3em solid #af2424;
@@ -86,13 +85,18 @@ p {
       font-size: 1.5em;
       text-align: right; }
   .responsive-menu:hover ul {
-    margin-top: 1.1em;
-    width: 100%;
+    margin-top: 3em;
+    position: fixed;
+    direction: rtl;
+    float: right;
     left: auto;
     right: 0; }
     @media only screen and (min-width: 450px) {
       .responsive-menu:hover ul {
-        margin-top: 1.6em; } }
+        margin-top: 3.4em; } }
+    @media only screen and (min-width: 1000px) {
+      .responsive-menu:hover ul {
+        margin-top: 4.2em; } }
   .responsive-menu:hover ul a {
     text-decoration: none; }
   .responsive-menu:hover ul li:hover {
@@ -112,8 +116,10 @@ p {
       width: 12em; } }
 
 .menu-button {
+  position: absolute;
   width: 3em;
-  margin: 1em 1em 0 0; }
+  margin: 1em 1em 0 0;
+  right: 0.3em; }
   @media only screen and (min-width: 450px) {
     .menu-button {
       width: 3.3em;
