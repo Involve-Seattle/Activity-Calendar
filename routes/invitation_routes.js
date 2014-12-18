@@ -15,9 +15,9 @@ module.exports = function(app) {
       if (err) return res.status(500).send('there was an error' + err);
       console.log('INSIDE findOne');
       sendgrid.send({
-        to: user.friendEmail,
+        to: req.body.friendEmail,
         from: 'chareesagraham@gmail.com',
-        subject: 'hiiidey hooo',
+        subject: 'A Friend Has Invited You!',
         text: 'this is CHAREESA!'
       }, function(err, json) {
         if (err) { return console.error(err); }
