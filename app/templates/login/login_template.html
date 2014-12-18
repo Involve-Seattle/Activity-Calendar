@@ -2,8 +2,8 @@
   <h1>HELLO!!</h1>
   <div data-ng-controller='loginCtrl' data-ng-init='index()'>
     <div>
-      <button data-ng-click='user.loggingIn = !user.loggingIn; user.signingUp = false'>Log In</button>
-      <div data-ng-show='user.loggingIn'>
+      <button data-ng-click='loggingIn = !loggingIn; signingUp = false'>Log In</button>
+      <div data-ng-show='loggingIn'>
         <form name='userLoginForm'>
           <input type='text' placeholder='email' data-ng-model='user.email'>
           <input type='password' placeholder='password' data-ng-model='user.password'>
@@ -12,8 +12,8 @@
       </div>
     </div>
     <div>
-      <button data-ng-click='user.signingUp = !user.signingUp; user.loggingIn = false'>Sign Up</button>
-      <div data-ng-show='user.signingUp'>
+      <button data-ng-click='signingUp = !signingUp; loggingIn = false'>Sign Up</button>
+      <div data-ng-show='signingUp'>
         <form name='newUserForm'>
           <input type='text' placeholder='email' data-ng-model='newUser.email'>
           <input type='password' placeholder='password' data-ng-model='newUser.password'>
