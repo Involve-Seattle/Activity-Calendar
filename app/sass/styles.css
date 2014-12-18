@@ -34,6 +34,10 @@ table {
   font-family: 'Kreon', serif;
   src: url('http://fonts.googleapis.com/css?family=Kreon'); }
 
+@font-face {
+  font-family: 'Quattrocento Sans', sans-serif;
+  src: url('http://fonts.googleapis.com/css?family=Quattrocento+Sans'); }
+
 body {
   background-color: #bcd9e3; }
 
@@ -42,7 +46,7 @@ h1 {
   color: #468fa6; }
 
 p {
-  font-family: 'Kreon', serif;
+  font-family: 'Quattrocento Sans', sans-serif;
   color: gray; }
 
 .site-banner {
@@ -70,7 +74,7 @@ p {
       text-align: right; }
     .responsive-menu ul a {
       white-space: nowrap;
-      font-family: 'Kreon', serif;
+      font-family: 'Quattrocento Sans', sans-serif;
       color: gray;
       background-color: #fffbf2;
       font-size: 1.5em;
