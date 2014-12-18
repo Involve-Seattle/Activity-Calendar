@@ -31,19 +31,29 @@ table {
   border-spacing: 0; }
 
 @font-face {
-  font-family: 'Kreon', serif;
-  src: url('http://fonts.googleapis.com/css?family=Kreon'); }
+  font-family: 'kreonregular';
+  src: url('fonts/kreon-regular-webfont.eot');
+  src: url('fonts/kreon-regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/kreon-regular-webfont.woff2') format('woff2'), url('fonts/kreon-regular-webfont.woff') format('woff'), url('fonts/kreon-regular-webfont.ttf') format('truetype'), url('fonts/kreon-regular-webfont.svg#kreonregular') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'quattrocento_sansregular';
+  src: url('fonts/quattrocentosans-regular-webfont.eot');
+  src: url('fonts/quattrocentosans-regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/quattrocentosans-regular-webfont.woff2') format('woff2'), url('fonts/quattrocentosans-regular-webfont.woff') format('woff'), url('fonts/quattrocentosans-regular-webfont.ttf') format('truetype'), url('fonts/quattrocentosans-regular-webfont.svg#quattrocento_sansregular') format('svg');
+  font-weight: normal;
+  font-style: normal; }
 
 body {
-  background-color: #bcd9e3; }
+  background-color: #cee3ea; }
 
 h1 {
-  font-family: 'Kreon', serif;
+  font-family: 'kreonregular', serif;
   color: #468fa6; }
 
 p {
-  font-family: 'Kreon', serif;
-  color: gray; }
+  font-family: 'quattrocento_sansregular', sans-serif;
+  color: #666666; }
 
 .site-banner {
   background-color: #468fa6;
@@ -70,8 +80,8 @@ p {
       text-align: right; }
     .responsive-menu ul a {
       white-space: nowrap;
-      font-family: 'Kreon', serif;
-      color: gray;
+      font-family: 'quattrocento_sansregular', sans-serif;
+      color: #666666;
       background-color: #fffbf2;
       font-size: 1.5em;
       text-align: right; }
@@ -86,9 +96,9 @@ p {
   .responsive-menu:hover ul a {
     text-decoration: none; }
   .responsive-menu:hover ul li:hover {
-    background-color: #e0edf2; }
+    background-color: #aacfdb; }
   .responsive-menu:hover ul li:hover a {
-    background-color: #e0edf2; }
+    background-color: #aacfdb; }
 
 .logo {
   width: 8em;
@@ -113,21 +123,16 @@ p {
       width: 4em;
       margin: 1.5em 1.8em 0 0; } }
 
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: stretch;
-  margin: 0.5em; }
-
-.flex-items {
-  background-color: white;
-  border: 0.1em solid #a6a6a6;
-  border-radius: 0.5em;
-  flex-grow: 1;
-  margin: 0.5em;
-  padding: 1em; }
-  .flex-items h1 {
+.list-items {
+  display: block;
+  width: 80%;
+  border-bottom: 0.1em solid #a6a6a6;
+  padding: 1em;
+  margin-left: 5%; }
+  @media only screen and (min-width: 450px) {
+    .list-items {
+      margin-left: 35%;
+      width: 45%; } }
+  .list-items h1 {
     font-size: 1.3em;
     margin-bottom: 0.3em; }
