@@ -1,8 +1,9 @@
-'use strict'
+'use strict';
 
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+require('./lib/getRssFeed')();
 
 var passport = require('passport');
 
@@ -16,21 +17,23 @@ mongoose.connect(process.env.MONGO_URL || process.env.MONGOLAB_URI || 'mongodb:/
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('db connected');
-})
+  console.log('db connected, welcome to involve...');
+});
 
 app.set('jwtSecret', process.env.JWT_secret || 'getanewone');
 
 app.use(passport.initialize());
-
-// require('./lib/passport')(passport);
-// var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
+//
+require('./lib/passport')(passport);
+var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 
 // var eventsRouter = express.Router();
 // eventsRouter.use(jwtauth);
 
-// require('./routes/users_routes')(app, jwtauth);
-// require('./routes/event_routes')(eventsRouter);
+require('./routes/user_routes')(app, passport);
+require('./routes/generalEvents_routes')(app);
+require('./routes/mymeets_routes')(app);
+require('./routes/invitation_routes')(app);
 // app.use('/', eventsRouter);
 
 app.set('port', process.env.PORT || 3000);
