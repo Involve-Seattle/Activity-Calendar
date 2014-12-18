@@ -38,9 +38,7 @@ describe('create and login user', function() {
       email: email,
       password: password,
       passwordConfirmation: password,
-      locations: [{
-        cityName: 'testCity'
-      }]
+      locations: 'testCity'
     })
     .end(function(err, res) {
       expect(err).to.eql(null);
@@ -48,7 +46,7 @@ describe('create and login user', function() {
       User.findOne({email: 'test@example.com'}, function(err, user) {
         expect(user).to.not.eql(undefined);
         expect(user).to.have.property('locations');
-        expect(user.locations[0].cityName).to.eql('testCity');
+        expect(user.locations).to.eql('testCity');
       });
       done();
     });

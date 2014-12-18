@@ -2,7 +2,6 @@
 
 module.exports = function(app) {
   app.factory('userService', ['$http', '$cookies', '$base64', '$location', function($http, $cookies, $base64, $location) {
-
     return {
       login: function(user) {
         $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(user.email + ':' + user.password); //jshint ignore:line
@@ -17,13 +16,12 @@ module.exports = function(app) {
       signUp: function(newUser) {
         if (newUser.password !== newUser.passwordConfirmation) return ({msg: 'password and confirmation did not match'});
         if (!newUser.email) return ({msg: 'did not specify an email'});
-        // if ($scope.errors.length) return;
         newUser.email = $base64.encode(newUser.email);
         newUser.password = $base64.encode(newUser.password);
         return $http({
-        method: 'POST',
-        url: '/api/newUser',
-        data: newUser
+          method: 'POST',
+          url: '/api/newUser',
+          data: newUser
         });
       },
 
