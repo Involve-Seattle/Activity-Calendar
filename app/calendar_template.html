@@ -26,12 +26,15 @@
       <img class="logo" src="images/involve_logo.svg">
     </div>
   </header>
+
   <div class="flex-container">
-    <div data-ng-repeat="event in events" class="flex-items list-items">
+    <div data-ng-repeat="event in events" class="flex-items">
       <div data-ng-click="viewLarge(event)">
-        <h1>{{event.eventTitle}}</h1>
-        <p>{{event.eventAddress}}</p>
-        <p>{{event.eventDate}}</p>
+        <section class="list-items">
+          <h1>{{event.eventTitle}}</h1>
+          <p>{{event.eventAddress}}</p>
+          <p>{{event.eventDate}}</p>
+        </section>
       </div>
     </div>
 
