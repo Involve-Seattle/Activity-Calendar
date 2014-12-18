@@ -53,6 +53,22 @@ describe('create and login user', function() {
     });
   });
 
+  it('should not let user submit blank password on signup', function(done) {
+    chai.request('http://localhost:3000')
+    .post('/api/login')
+    .send({
+      email: email,
+      password: '',
+      passwordConfirmation: password,
+      locations: 'seattle'
+    })
+    .end(function(err, res) {
+      expect(err).to.eql(null);
+      expect(res.body).to.not.have.property('jwt');
+      done();
+    });
+  });
+
   it('should login user', function(done) {
     chai.request('http://localhost:3000')
     .get('/api/login')
