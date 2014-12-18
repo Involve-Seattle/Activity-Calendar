@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb:/
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('db connected, welcome to involve...');
+  console.log('db connected, WELCOME to involve.. the place of magic...');
 });
 
 app.set('jwtSecret', process.env.JWT_secret || 'getanewone');
