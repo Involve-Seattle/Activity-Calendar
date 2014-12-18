@@ -1,8 +1,9 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('calendCtrl', ['$scope', '$http', '$cookies', 'ResourceBackend', function($scope, $http, ResourceAuth, ResourceBackend, $cookies) {
+  app.controller('calendCtrl', ['$scope', '$http', '$cookies', 'ResourceBackend', '$location', function($scope, $http, ResourceAuth, ResourceBackend, $cookies, $location) {
     var calBackend = new ResourceBackend('events');
+    $scope.user = {};
     // var auth = new ResourceAuth();
     console.log($cookies);
     // auth.signedIn($cookies);
@@ -14,7 +15,7 @@ module.exports = function(app) {
       calBackend.index()
       .success(function(data) {
         $scope.events = data;
-        console.log(data);
+        //console.log(data);
       });
     };
 
@@ -29,5 +30,20 @@ module.exports = function(app) {
       // console.log($location);
     };
 
+    $scope.invite = function() {
+      var inviteObj = {friendInfo: $scope.user, eventInfo: $scope.currentEvent };
+      console.log(inviteObj);
+      $scope.errors = [];
+      $http({
+        method: 'POST',
+        url: '/api/invitation',
+        data: $scope.user
+      })
+      .success(function(data) {
+        console.log('success!');
+        // $cookies.jwt = data.jwt;
+        // $location.path('/calendar');
+      });
+    };
   }]);
 };
