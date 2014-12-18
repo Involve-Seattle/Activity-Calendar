@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/build'));
 
-mongoose.connect(process.env.MONGO_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/mymeetings_development');
+mongoose.connect(process.env.MONGO_URI || process.env.MONGOLAB_URL || 'mongodb://localhost/mymeetings_development');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
