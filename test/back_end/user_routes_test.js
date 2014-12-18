@@ -12,6 +12,7 @@ var expect = chai.expect;
 
 var email = new Buffer('test@example.com', 'ascii').toString('base64');
 var password = new Buffer('Test1@', 'ascii').toString('base64');
+var authorization = 'Basic ' + new Buffer('test@example.com:testtest', 'ascii').toString('base64');
 
 before(function(done) {
   User.remove({}, function(err) {
@@ -56,8 +57,7 @@ describe('create and login user', function() {
     chai.request('http://localhost:3000')
     .get('/api/login')
     .set({
-      email: email,
-      password: password
+      authorization: authorization
     })
     .end(function(err, res) {
       expect(err).to.eql(null);

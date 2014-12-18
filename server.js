@@ -30,7 +30,7 @@ var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 // var eventsRouter = express.Router();
 // eventsRouter.use(jwtauth);
 
-require('./routes/user_routes')(app);
+require('./routes/user_routes')(app, passport);
 require('./routes/generalEvents_routes')(app);
 require('./routes/mymeets_routes')(app);
 require('./routes/invitation_routes')(app);

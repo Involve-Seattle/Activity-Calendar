@@ -11,7 +11,7 @@ var expect = chai.expect;
 
 var token;
 
-beforeEach(function() {
+before(function() {
   GeneralEvents.remove({}, function(err) {
     if (err) return console.log(err);
     console.log('db cleaned');
@@ -25,7 +25,7 @@ beforeEach(function() {
   });
 });
 
-afterEach(function() {
+after(function() {
   GeneralEvents.remove({}, function(err) {
     if (err) return console.log(err);
     console.log('db cleaned');
