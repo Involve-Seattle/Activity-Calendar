@@ -20,10 +20,6 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/', function(req, res) {
-    res.sendFile('../app/index.html');
-  });
-
   app.get('/api/login', passport.authenticate('basic', {session: false}), function(req, res) {
     res.json({jwt: req.user.generateToken(app.get('jwtSecret'))});
   });

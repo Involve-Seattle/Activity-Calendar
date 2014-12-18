@@ -1,15 +1,18 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('calendCtrl', ['$scope', '$http', '$cookies', '$location','ResourceAuth', 'ResourceBackend', function($scope, $http, $cookies, $location, ResourceAuth, ResourceBackend) {
+  app.controller('calendCtrl', ['$scope', '$http', '$cookies', '$location','userService', 'ResourceBackend', function($scope, $http, $cookies, $location, userService, ResourceBackend) {
     var calBackend = new ResourceBackend('events');
-    var auth = new ResourceAuth();
-    auth.signedIn($cookies);
+//  app.controller('calendCtrl', ['$scope', '$http', '$cookies', '$location','ResourceAuth', 'ResourceBackend', function($scope, $http, $cookies, $location, ResourceAuth, ResourceBackend) {
+    // var calBackend = new ResourceBackend('events');
+    // var auth = new ResourceAuth();
+    // auth.signedIn($cookies);
+
     /*jshint sub:true*/
     $http.defaults.headers.common['jwt'] = $cookies.jwt;
     /*jshint sub:false*/
     $scope.index = function() {
-      auth.signedIn($cookies);
+      userService.signedIn($cookies);
       calBackend.index()
       .success(function(data) {
         $scope.events = data;
@@ -18,19 +21,19 @@ module.exports = function(app) {
     };
 
     $scope.viewLarge = function(currentEvent) {
-      auth.signedIn($cookies);
+      userService.signedIn($cookies);
       $scope.currentEvent = currentEvent;
       $scope.show = true;
       console.log($scope.currentEvent);
     };
 
     $scope.viewAll = function() {
-      auth.signedIn($cookies);
+      userService.signedIn($cookies);
       $scope.show = false;
     };
 
     $scope.invite = function() {
-      auth.signedIn($cookies);
+      userService.signedIn($cookies);
       var inviteObj = {friendInfo: $scope.user, eventInfo: $scope.currentEvent };
       console.log(inviteObj);
       $scope.errors = [];

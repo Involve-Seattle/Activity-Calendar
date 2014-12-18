@@ -21,7 +21,7 @@ describe('resource service', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should make a get request to notes', function() {
+  it('should make a get request to events', function() {
     $httpBackend.expectGET('/api/events').respond(200, []);
 
     var promise = eventService.index();

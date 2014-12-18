@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('loginCtrl', ['$scope', '$http', '$cookies', '$base64', '$location', 'userService', 'ResourceAuth', function($scope, $http, $cookies, $base64, $location, userService, ResourceAuth) {
+  app.controller('loginCtrl', ['$scope', '$http', '$cookies', '$base64', '$location', 'userService', function($scope, $http, $cookies, $base64, $location, userService) {
+
     $scope.errors = [];
-    var auth = new ResourceAuth();
-    auth.signedIn($cookies);
+
     $scope.login = function() {
       $scope.errors = [];
 
@@ -22,14 +22,18 @@ module.exports = function(app) {
       $scope.errors = [];
       var newUser = $scope.newUser;
 
+      if (newUser.password !== newUser.passwordConfirmation) return ({msg: 'password and confirmation did not match'});
+      if (!newUser.email) return ({msg: 'did not specify an email'});
+      if (!newUser.password) return ({msg: 'did not specify a password'});
+
+      if ($scope.errors.length) return;
+
       userService.signUp($scope.newUser)
-      .success(function(data) {
-        $cookies.jwt = data.jwt;
-        $location.path('/calendar');
-      })
+
       .error(function(data) {
         $scope.errors.push(data);
       });
+
     };
   }]);
 };

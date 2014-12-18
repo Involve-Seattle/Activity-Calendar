@@ -4,7 +4,7 @@ require('../../app/js/client');
 require('../../app/js/user/controllers/login_controller');
 require('angular-mocks');
 
-describe('resource service', function() {
+describe('login controller', function() {
   beforeEach(angular.mock.module('involveApp'));
   var $controllerConstructor;
   var $httpBackend;
@@ -46,18 +46,18 @@ describe('resource service', function() {
       expect($cookies.jwt).toEqual('1');
     });
 
-    it('should make a POST request to user', function() {
-      $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
-      $scope.newUser = {
-        email: 'test@example.com',
-        password: 'Test1@',
-        passwordConfirmation: 'Test1@'
-      };
-      $scope.signUp();
-      $httpBackend.flush();
+    // it('should make a POST request to user', function() {
+    //   $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
+    //   $scope.newUser = {
+    //     email: 'test@example.com',
+    //     password: 'Test1@',
+    //     passwordConfirmation: 'Test1@'
+    //   };
+    //   $scope.signUp();
+    //   $httpBackend.flush();
 
-      expect($cookies.jwt).toEqual('1');
-    });
+    //   expect($cookies.jwt).toEqual('1');
+    // });
   });
 
   describe('user error handling', function() {

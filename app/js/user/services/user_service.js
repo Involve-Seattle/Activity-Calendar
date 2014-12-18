@@ -1,15 +1,16 @@
 'use strict';
 
 module.exports = function(app) {
-  app.factory('userService', ['$http', '$cookies', '$base64', '$location', function($http, $cookies, $base64, $location) {
+  app.factory('userService', ['$http', '$cookies', '$base64', '$location', '$rootScope', function($http, $cookies, $base64, $location, $rootScope) {
+
     return {
       login: function(user) {
-        /*jshint sub:true*/
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $base64.encode(user.email + ':' + user.password);
-        /*jshint sub:false*/
+        $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(user.email + ':' + user.password); //jshint ignore:line
+
         return $http({
           method: 'GET',
-          url: '/api/login'
+          url: '/api/login',
+          data: user
         });
       },
 
@@ -21,17 +22,42 @@ module.exports = function(app) {
           return ({msg: 'did not specify an email'});
         }
 
-        newUser.email = $base64.encode(newUser.email);
-        newUser.password = $base64.encode(newUser.password);
+        var newUserEncoded = {};
+        newUserEncoded.email = $base64.encode(newUser.email);
+        newUserEncoded.password = $base64.encode(newUser.password);
+
         return $http({
           method: 'POST',
           url: '/api/newUser',
-          data: newUser
+          data: newUserEncoded
+        })
+        .success(function(data) {
+          console.log('hi from success');
+          $cookies.jwt = data.jwt;
+          console.log('cookies in success' + $cookies.jwt);
+          $rootScope.user = {
+            email: newUser.email,
+            loggedin: true
+          };
+          console.log('rootscope email, in success ' + $rootScope.user.email);
+          $rootScope.$broadcast('user:loggedIn');
+          $location.path('/calendar');
         });
       },
 
-      logout: function($cookies) {
+      signedIn: function($cookies) {
+        if (!$cookies.jwt || !$cookies.jwt.length) return $location.path('/login');
+        // console.log('user logged in');
+        // $location.path('/calendar');
+      },
+
+      logout: function() {
         $cookies.jwt = undefined;
+        $rootScope.user = {
+          email: null,
+          loggedin: false
+        };
+        $rootScope.$broadcast('user:loggedOut');
         return $cookies;
       }
 
