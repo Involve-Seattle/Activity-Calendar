@@ -23,13 +23,18 @@ module.exports = function(app) {
       var newUser = $scope.newUser;
 
       $userService.signUp($scope.newUser)
-      .success(function(data) {
-        $cookies.jwt = data.jwt;
-        $location.path('/calendar');
-      })
+      // .success(function(data) {
+      //   $cookies.jwt = data.jwt;
+      //   $location.path('/calendar');
+      // })
       .error(function(data) {
         $scope.errors.push(data);
       });
+
+      if ($cookies.jwt) {
+        $location.path('/calendar');
+      }
+      console.log('cookies from after if block in login controller' + $cookies.jwt);
     };
   }]);
 };

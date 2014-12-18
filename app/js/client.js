@@ -16,7 +16,7 @@ require('./events/controllers/calendar_controller.js')(involveApp);
 
 involveApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
-  .when('/template', {
+  .when('/login', {
     templateUrl: 'templates/login/login_template.html',
     controller: 'loginCtrl'
   })
@@ -29,6 +29,6 @@ involveApp.config(['$routeProvider', function($routeProvider) {
     controller: 'calendCtrl'
   })
   .otherwise({
-    redirectTo: '/template'
+    redirectTo: '/login'
   });
 }]);
