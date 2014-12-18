@@ -11,7 +11,7 @@ require('../../server');
 var expect = chai.expect;
 
 var email = new Buffer('test@example.com', 'ascii').toString('base64');
-var password = new Buffer('testtest', 'ascii').toString('base64');
+var password = new Buffer('Test1@', 'ascii').toString('base64');
 
 before(function(done) {
   User.remove({}, function(err) {

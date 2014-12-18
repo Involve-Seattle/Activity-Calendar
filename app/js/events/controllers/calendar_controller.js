@@ -41,6 +41,8 @@ module.exports = function(app) {
       })
       .success(function(data) {
         console.log('success!');
+        console.log('THIS is $scope.user ', $scope.user);
+        $scope.user = null;
         // $cookies.jwt = data.jwt;
         // $location.path('/calendar');
       });

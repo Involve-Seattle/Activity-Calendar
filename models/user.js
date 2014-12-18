@@ -5,8 +5,8 @@ var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
 
 var userSchema = mongoose.Schema({
-  email: String,
-  password: String,
+  email: {type: String, required: true},
+  password: {type: String, require: true},
   locations: String
 });
 

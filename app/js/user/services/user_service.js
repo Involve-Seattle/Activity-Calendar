@@ -14,8 +14,13 @@ module.exports = function(app) {
       },
 
       signUp: function(newUser) {
-        if (newUser.password !== newUser.passwordConfirmation) return ({msg: 'password and confirmation did not match'});
-        if (!newUser.email) return ({msg: 'did not specify an email'});
+        if (newUser.password !== newUser.passwordConfirmation || newUser.password === undefined) {
+          return ({msg: 'password and confirmation did not match'});
+        }
+        if (!newUser.email) {
+          return ({msg: 'did not specify an email'});
+        }
+
         newUser.email = $base64.encode(newUser.email);
         newUser.password = $base64.encode(newUser.password);
         return $http({
