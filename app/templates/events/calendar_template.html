@@ -17,7 +17,7 @@
       <button data-ng-click="viewAll()">View All</button>
       <div>
         <button data-ng-click='inviteFriend = !inviteFriend'>Invite a Friend!</button>
-        <div data-ng-show='!inviteFriend'>
+        <div data-ng-show='inviteFriend'>
           <form name='invitationForm'>
             <input type='text' placeholder='friends email' ng-model='user.friendEmail'>
             <input type='text' placeholder='message' ng-model='user.friendMessage'>
