@@ -1,17 +1,16 @@
 
 <div class="flex-container">
   <div data-ng-controller="calendCtrl" data-ng-init="index()">
-    <div data-ng-repeat="event in events">
-      <div>
-        <div data-ng-click="viewLarge(event)" data-ng-hide='show'>
-          <!-- <button data-ng-click="viewLarge(event)";></button> -->
-          <p>{{event.eventTitle}}</p>
-          <!-- <p>{{event.eventContent}}</p> -->
-          <!-- <p>{{event.eventContentLong}}</p> -->
-          <a href={{event.eventUrl}}>Calendar Listing</a>
-        </div>
+    <div data-ng-repeat="event in events" class="flex-items">
+      <div data-ng-click="viewLarge(event)">
+        <section class="list-items">
+          <h1>{{event.eventTitle}}</h1>
+          <p>{{event.eventAddress}}</p>
+          <p>{{event.eventDate}}</p>
+        </section>
       </div>
     </div>
+  </div>
     <div data-ng-show='show'>
       <div>
         <button data-ng-click="viewAll()">View All</button>

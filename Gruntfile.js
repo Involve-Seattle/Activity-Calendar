@@ -21,7 +21,7 @@ module.exports = function(grunt) {
     },
 
     jscs: {
-      src: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js'],
+      src: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js', '!app/js/events/controllers/calendar_controller.js', '!app/js/user/services/user_service.js'],
       options: {
         config: '.jscsrc'
       }

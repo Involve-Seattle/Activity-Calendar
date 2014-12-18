@@ -3,7 +3,7 @@
 var User = require('../models/user');
 var decode = require('../lib/decode');
 
-module.exports = function(app) {
+module.exports = function(app, passport) {
   app.post('/api/newUser', function(req, res) {
     var info = decode(req.body);
     var regex = /[a-zA-Z0-9_]{5,}/;
@@ -12,9 +12,9 @@ module.exports = function(app) {
 
     var newUser = new User();
     newUser.email = info.email;
-    newUser.password = info.password;
+    newUser.password = newUser.generateHash(info.password);
     newUser.locations = req.body.locations;
-    newUser.save(function(err) {
+    newUser.save(function(err, data) {
       if (err) {
         console.log(err);
         return res.status(500).send('server error yo');
@@ -27,16 +27,8 @@ module.exports = function(app) {
     res.sendFile('../app/index.html');
   });
 
-  app.get('/api/login', function(req, res) {
-    var info = decode(req.headers);
-
-    User.findOne({email: info.email}, function(err, user) {
-      if (err) return res.status(404).send('server error');
-
-      if (!user) return res.status(404).send('access error');
-
-      res.json({jwt: user.generateToken(app.get('jwtSecret'))});
-    });
+  app.get('/api/login', passport.authenticate('basic', {session: false}), function(req, res) {
+    res.json({jwt: req.user.generateToken(app.get('jwtSecret'))});
   });
 
 };
