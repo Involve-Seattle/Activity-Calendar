@@ -5,12 +5,9 @@ var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
 
 var userSchema = mongoose.Schema({
-  name: String,
-  locations: [
-  {
-    cityName: String
-
-  }]
+  email: String,
+  password: String,
+  locations: String
 });
 
 userSchema.methods.generateHash = function(password) {
@@ -27,7 +24,7 @@ userSchema.methods.generateToken = function(secret) {
   var expires = Date.now() + week;
   var _this = this;
   var token = jwt.encode({
-    iss. _this._id,
+    iss: _this._id,
     expire: expires
   }, secret);
   return token;

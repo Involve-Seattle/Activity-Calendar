@@ -7,16 +7,14 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     files: [
-      'test/front-end/*-test.js'
+      'test/testbundle.js'
     ],
 
     exclude: [
       '**/*.swp'
     ],
 
-    preprocessors: {
-      'test/front-end/*-test.js': [ 'browserify' ]
-    },
+    preprocessors: {},
 
     reporters: ['progress'],
 

@@ -11,7 +11,9 @@
     "afterEach"  : false,
     "equal"      : false,
     "$"          : false,
-    "document"   : false
+    "document"   : false,
+    "angular"    : false,
+    "expect"     : false
   },
   "globalstrict": true,
   "quotmark": false,
@@ -20,5 +22,7 @@
   "undef": true,
   "unused": true,
   "indent": 2,
-  "node": true
+  "node": true,
+  "unused": false,
+  "-W079": false
 }

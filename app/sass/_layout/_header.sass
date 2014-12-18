@@ -1,0 +1,60 @@
+.site-banner
+  background-color: $color-primary--5
+  width: 100%
+  margin: 0 0 2em 0
+  padding: 0
+  border-bottom: 0.4em solid $color-secondary--2
+
+.responsive-menu
+  float: right
+  right: 0
+  position: absolute
+  ul
+    position: relative /* absolute? */
+    list-style: none
+    left: -9999px /* Hide off-screen when not needed (this is more accessible than display:none;) */
+    li
+      padding: 0.6em
+      float: none
+      background-color: $color-tertiary--1
+      border-bottom: 0.3em solid $color-secondary--2
+      text-align: right
+    a
+      white-space: nowrap
+      font-family: $font-family--body
+      color: $color-default--2
+      background-color: $color-tertiary--1
+      font-size: 1.5em
+      text-align: right
+  &:hover ul
+    margin-top: 1.1em
+    width: 100%
+    left: auto
+    right: 0
+    @media only screen and (min-width: 450px)
+      margin-top: 1.6em
+  &:hover ul a
+    text-decoration: none
+  &:hover ul li:hover
+    background-color: $color-primary--8
+  &:hover ul li:hover a
+    background-color: $color-primary--8
+
+.logo
+  width: 8em
+  margin: 0.2em 0 0 0.3em
+  padding: 0
+  @media only screen and (min-width: 450px)
+    width: 10em
+  @media only screen and (min-width: 1000px)
+    width: 12em
+
+.menu-button
+  width: 3em
+  margin: 1em 1em 0 0
+  @media only screen and (min-width: 450px)
+    width: 3.3em
+    margin: 1.2em 1.2em 0 0
+  @media only screen and (min-width: 1000px)
+    width: 4em
+    margin: 1.5em 1.8em 0 0
