@@ -5,16 +5,16 @@ module.exports = function(app) {
 
     return {
       login: function(user) {
-        /*jshint sub:true*/
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $base64.encode(user.email + ':' + user.password);
-        /*jshint sub:false*/
+        $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(user.email + ':' + user.password); //jshint ignore:line
+
         return $http({
           method: 'GET',
-          url: '/api/login'
+          url: '/api/login',
+          data: user
         });
       },
 
-      signUp: function(newUser, done) {
+      signUp: function(newUser) {
         if (newUser.password !== newUser.passwordConfirmation) return ({msg: 'password and confirmation did not match'});
         if (!newUser.email) return ({msg: 'did not specify an email'});
         // if ($scope.errors.length) return;
@@ -41,7 +41,7 @@ module.exports = function(app) {
         });
       },
 
-      logout: function($cookies) {
+      logout: function() {
         $cookies.jwt = undefined;
         $rootScope.user = {
           email: null,
