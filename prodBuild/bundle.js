@@ -112,7 +112,7 @@ module.exports = function(app) {
       $http({
         method: 'POST',
         url: '/api/invitation',
-        data: $scope.user
+        data: inviteObj
       })
       .success(function(data) {
         console.log('success!');

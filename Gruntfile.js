@@ -110,7 +110,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build:dev', ['clean:dev', 'browserify:dev', 'copy:dev']);
-  grunt.registerTask('build:prodBuild', ['clean:prod', 'browserify:prod', 'copy:prod']);
+  grunt.registerTask('build:prod', ['clean:prod', 'browserify:prod', 'copy:prod']);
   grunt.registerTask('test:client', ['browserify:test', 'karma:unit']);
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', 'test:client']);
   grunt.registerTask('styles', ['sass']);
