@@ -33,6 +33,7 @@ var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 require('./routes/user_routes')(app);
 require('./routes/generalEvents_routes')(app);
 require('./routes/mymeets_routes')(app);
+require('./routes/invitation_routes')(app);
 // app.use('/', eventsRouter);
 
 app.set('port', process.env.PORT || 3000);
