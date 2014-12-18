@@ -5,12 +5,12 @@ module.exports = function(app) {
 
     return {
       login: function(user) {
-        $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(user.email + ':' + user.password); //jshint ignore:line
-
+        /*jshint sub:true*/
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + $base64.encode(user.email + ':' + user.password);
+        /*jshint sub:false*/
         return $http({
           method: 'GET',
-          url: '/api/login',
-          data: user
+          url: '/api/login'
         });
       },
 
