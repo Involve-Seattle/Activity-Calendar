@@ -36,7 +36,7 @@ module.exports = function(app) {
             loggedin: true
           };
           console.log('rootscope email, in success ' + $rootScope.user.email);
-          $rootScope.$broadcast('user:loggedin');
+          $rootScope.$broadcast('user:loggedIn');
           $location.path('/calendar');
         });
       },
@@ -47,7 +47,7 @@ module.exports = function(app) {
           email: null,
           loggedin: false
         };
-        $rootScope.$broadcast('user:loggedout');
+        $rootScope.$broadcast('user:loggedOut');
         $location.path('/users');
         return $cookies;
       }

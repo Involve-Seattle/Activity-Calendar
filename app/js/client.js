@@ -13,6 +13,7 @@ require('./user/services/user_service')(involveApp);
 //controllers
 require('./user/controllers/login_controller.js')(involveApp);
 require('./events/controllers/calendar_controller.js')(involveApp);
+require('./controllers/nav_controller.js')(involveApp);
 
 involveApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
