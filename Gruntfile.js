@@ -8,10 +8,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-sass');
 
   grunt.initConfig({
     jshint: {
-      all: ['*.js', 'app/**/*.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js', 'test/**/*.js', '!/build/**/*.js', '!test/test_bundle.js', '!test/testbundle.js'],
+      all: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js'],
       options: {
         jshintrc: true,
         ignores: ['public/jquery-1.11.1.js']
@@ -19,7 +21,7 @@ module.exports = function(grunt) {
     },
 
     jscs: {
-      src: ['*.js', 'app/**/*.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js', 'test/**/*.js', '!/build/**/*.js', '!test/test_bundle.js', '!test/testbundle.js'],
+      src: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js'],
       options: {
         config: '.jscsrc'
       }
@@ -71,11 +73,28 @@ module.exports = function(grunt) {
         singleRun: true,
         browsers: ['PhantomJS']
       }
+    },
+    sass: {
+      dist: {
+        files: {
+          'app/sass/styles.css': 'app/sass/styles.scss'
+        }
+      }
+    },
+    watch: {
+      source: {
+        files: ['app/sass/**/*.scss', 'app/sass/**/*.sass'],
+        tasks: ['sass'],
+        options: {
+          livereload: true
+        }
+      }
     }
   });
 
   grunt.registerTask('build:dev', ['clean:dev', 'browserify:dev', 'copy:dev']);
   grunt.registerTask('test:client', ['browserify:test', 'karma:unit']);
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', 'test:client']);
-  grunt.registerTask('default', ['test', 'build:dev']);
+  grunt.registerTask('styles', ['sass']);
+  grunt.registerTask('default', ['test', 'sass', 'build:dev']);
 };
