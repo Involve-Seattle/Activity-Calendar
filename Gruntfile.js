@@ -96,5 +96,5 @@ module.exports = function(grunt) {
   grunt.registerTask('test:client', ['browserify:test', 'karma:unit']);
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', 'test:client']);
   grunt.registerTask('styles', ['sass']);
-  grunt.registerTask('default', ['test', 'sass', 'build:dev']);
+  grunt.registerTask('default', ['test', 'styles', 'build:dev']);
 };
