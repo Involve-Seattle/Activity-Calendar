@@ -15,9 +15,6 @@ module.exports = function(app) {
       },
 
       signUp: function(newUser) {
-        if (newUser.password !== newUser.passwordConfirmation) return ({msg: 'password and confirmation did not match'});
-        if (!newUser.email) return ({msg: 'did not specify an email'});
-        // if ($scope.errors.length) return;
         var newUserEncoded = {};
         newUserEncoded.email = $base64.encode(newUser.email);
         newUserEncoded.password = $base64.encode(newUser.password);
@@ -41,6 +38,12 @@ module.exports = function(app) {
         });
       },
 
+      signedIn: function($cookies) {
+        if (!$cookies.jwt || !$cookies.jwt.length) return $location.path('/login');
+        // console.log('user logged in');
+        // $location.path('/calendar');
+      },
+
       logout: function() {
         $cookies.jwt = undefined;
         $rootScope.user = {
@@ -48,7 +51,6 @@ module.exports = function(app) {
           loggedin: false
         };
         $rootScope.$broadcast('user:loggedOut');
-        $location.path('/users');
         return $cookies;
       }
 

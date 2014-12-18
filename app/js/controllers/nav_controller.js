@@ -22,7 +22,9 @@ module.exports = function(app) {
     };
 
     $scope.logout = function() {
+      $location.path('/login');
       userService.logout();
+
     };
 
   }]);

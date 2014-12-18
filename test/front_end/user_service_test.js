@@ -25,24 +25,35 @@ describe('userService', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should make a post request to create a new user', function(done) {
-    newUser = {
-      email: 'test@example.com',
-      password: 'testtest',
-      passwordConfirmation: 'testtest'
-    };
-    $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
+// module(function($provide) {
+//   $provide.service('util', function() {
+//     this.isNumber = jasmine.createSpy('isNumber').andCallFake(function(num) {
+//       //a fake implementation
+//     });
+//     this.isDate = jasmine.createSpy('isDate').andCallFake(function(num) {
+//       //a fake implementation
+//     });
+//   });
+// });
 
-    var promise = userServiceTest.signUp(newUser);
+//   it('should make a post request to create a new user', function(done) {
+//     newUser = {
+//       email: 'test@example.com',
+//       password: 'testtest',
+//       passwordConfirmation: 'testtest'
+//     };
+//     $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
 
-    // console.log('promise' + promise);
-    promise.success(function(data) {
-      console.log('inside promise success');
-      // expect($cookies.jwt).toBe('1');
-      expect($rootScope.user.email).toBe('test@example.com');
-    });
-    $httpBackend.flush();
+//     var promise = userServiceTest.signUp(newUser);
 
-  });
+//     // console.log('promise' + promise);
+//     promise.success(function(data) {
+//       console.log('inside promise success');
+//       // expect($cookies.jwt).toBe('1');
+//       expect($rootScope.user.email).toBe('test@example.com');
+//     });
+//     $httpBackend.flush();
+
+//   });
 
 });
