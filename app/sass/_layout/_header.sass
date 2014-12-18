@@ -8,13 +8,13 @@
 .responsive-menu
   float: right
   right: 0
-  position: absolute
+  position: relative
   ul
-    position: relative /* absolute? */
+    position: absolute
     list-style: none
     left: -9999px /* Hide off-screen when not needed (this is more accessible than display:none;) */
     li
-      padding: 0.6em
+      padding: 0.8em 0.8em 0.8em 4em
       float: none
       background-color: $color-tertiary--1
       border-bottom: 0.3em solid $color-secondary--2
@@ -27,12 +27,16 @@
       font-size: 1.5em
       text-align: right
   &:hover ul
-    margin-top: 1.1em
-    width: 100%
+    margin-top: 3em
+    position: fixed
+    direction: rtl;
+    float: right
     left: auto
     right: 0
     @media only screen and (min-width: 450px)
-      margin-top: 1.6em
+      margin-top: 3.4em
+    @media only screen and (min-width: 1000px)
+      margin-top: 4.2em
   &:hover ul a
     text-decoration: none
   &:hover ul li:hover
@@ -50,8 +54,10 @@
     width: 12em
 
 .menu-button
+  position: absolute
   width: 3em
   margin: 1em 1em 0 0
+  right: 0.3em
   @media only screen and (min-width: 450px)
     width: 3.3em
     margin: 1.2em 1.2em 0 0
