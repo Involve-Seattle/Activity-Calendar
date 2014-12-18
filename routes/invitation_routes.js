@@ -6,19 +6,17 @@ var validator = require('validator');
 
 module.exports = function(app) {
   app.post('/api/invitation', function(req, res) {
-    console.log('body.friendEmail', req.body.friendEmail);
     if (!(validator.isEmail(req.body.friendEmail))) {
       return res.status(500).send('that is not a valid email');
     }
-    console.log('we made it to the route STILL!');
+
     User.findOne({email: req.body.email}, function(err, user) {
       if (err) return res.status(500).send('there was an error' + err);
-      console.log('INSIDE findOne');
       sendgrid.send({
-        to: user.friendEmail,
+        to: req.body.friendEmail,
         from: 'chareesagraham@gmail.com',
-        subject: 'hiiidey hooo',
-        text: 'this is CHAREESA!'
+        subject: 'A Friend Has Invited You to a Meeting!',
+        text: req.body.friendMessage
       }, function(err, json) {
         if (err) { return console.error(err); }
         res.send(json);

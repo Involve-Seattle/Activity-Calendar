@@ -11,8 +11,8 @@ require('../../server');
 var expect = chai.expect;
 
 var email = new Buffer('test@example.com', 'ascii').toString('base64');
-var password = new Buffer('testtest', 'ascii').toString('base64');
-var authorization = 'Basic ' + new Buffer('test@example.com:testtest', 'ascii').toString('base64');
+var password = new Buffer('Test1@', 'ascii').toString('base64');
+var authorization = 'Basic ' + new Buffer('test@example.com:Test1@', 'ascii').toString('base64');
 
 before(function(done) {
   User.remove({}, function(err) {
@@ -49,6 +49,22 @@ describe('create and login user', function() {
         expect(user).to.have.property('locations');
         expect(user.locations).to.eql('testCity');
       });
+      done();
+    });
+  });
+
+  it('should not let user submit blank password on signup', function(done) {
+    chai.request('http://localhost:3000')
+    .post('/api/login')
+    .send({
+      email: email,
+      password: '',
+      passwordConfirmation: password,
+      locations: 'seattle'
+    })
+    .end(function(err, res) {
+      expect(err).to.eql(null);
+      expect(res.body).to.not.have.property('jwt');
       done();
     });
   });

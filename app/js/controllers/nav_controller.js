@@ -1,25 +1,31 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('navCtrl', ['$scope', '$http', '$cookies', '$location', 'userService', function($scope, $http, $cookies, $location, userService) {
+  app.controller('navCtrl', ['$scope', '$http', '$cookies', '$location', '$rootScope', 'userService', function($scope, $http, $cookies, $location, $rootScope, userService) {
 
-//include the final code from Steph's loggedin_controller from notes app
-    // $scope.user = {
-    //   email: $cookies.email
-    // };
+    $scope.loggedIn = false;
 
-    // $scope.includeTemplate = function() {
-    //   if ($cookies.jwt) {
-    //     return "/users/loggedin_template.html"; //jshint ignore:line
-    //   }
-    //   return ""; //jshint ignore: line
-    // };
+    $scope.$on('user:loggedIn', function(event, data) {
+      $scope.loggedIn = true;
+    });
 
-    // $scope.signOut = function($cookies) {
-    //   userService.signOut($cookies);
-    //   $location.path('/users');
-    //   return $cookies;
-    // };
+    $scope.$on('user:loggedOut', function(event, data) {
+      $scope.loggedIn = false;
+    });
+
+    $scope.calendar = function() {
+      $location.path('/calendar');
+    };
+
+    $scope.favorites = function() {
+      $location.path('/favorites');
+    };
+
+    $scope.logout = function() {
+      $location.path('/login');
+      userService.logout();
+
+    };
 
   }]);
 };
