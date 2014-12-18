@@ -17,7 +17,7 @@ module.exports = function(app) {
         to: req.body.friendInfo.friendEmail,
         from: 'chareesagraham@gmail.com',
         subject: 'A Friend Has Invited You to a Meeting!',
-        html: '<h4>Chareesa Graham wants you to come to this!</h4><h3>' + req.body.eventInfo.eventTitle + '</h3><p>' + req.body.eventInfo.eventDate + '<p>'
+        html: '<h4>' + req.body.friendInfo.friendMessage + '</h4><h3>' + req.body.eventInfo.eventTitle + '</h3><p>' + req.body.eventInfo.eventDate + '<p>'
       }, function(err, json) {
         if (err) { return console.error(err); }
         res.send(json);
