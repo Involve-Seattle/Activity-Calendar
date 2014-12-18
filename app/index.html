@@ -1,16 +1,38 @@
-<!DOCTYPE html>
-<html lang='en'>
+<DOCTYPE html>
+<html>
 <head>
-  <meta charset='UTF-8'>
-  <title></title>
+  <meta charset="UTF-8">
+  <title>involve - Calendar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="sass/styles.css">
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 </head>
 <body>
-  <h1>This is my Index Page</h1>
+  <header class="site-banner">
+    <div class="navbar">
+      <nav class="responsive-menu">
+        <img class="menu-button" src="images/menu.svg">
+        <ul>
+          <li ng-click="FUNCTIONGOESHERE!!!"><a href="index.html">Calendar</a></li>
+          <li ng-click="FUNCTIONGOESHERE!!!"><a href="favorites.html">Favorites</a></li>
+          <li ng-click="FUNCTIONGOESHERE!!!"><a href="#">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="header-main">
+      <img class="logo" src="images/involve_logo.svg">
+    </div>
+  </header>
   <div data-ng-app='involveApp'>
     <div data-ng-view>
     </div>
   </div>
 
   <script src="bundle.js"></script>
+  <footer>
+  </footer>
 </body>
 </html>
