@@ -22,7 +22,11 @@ coverage
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/release
 
+# dev artifacts (production goes in dist)
+build/
 test/testbundle.js
 
 # bower
@@ -89,5 +93,5 @@ com_crashlytics_export_strings.xml
 .sass-cache/test/testbundle.js
 .sass-cache/
 /data
-
+/build
 /test/testbundle.js
