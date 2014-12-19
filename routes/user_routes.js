@@ -19,7 +19,6 @@ module.exports = function(app, passport) {
       newUser.locations = req.body.locations;
       newUser.save(function(err, data) {
         if (err) {
-          console.log(err);
           return res.status(500).send('server error');
         }
         res.json({jwt: newUser.generateToken(app.get('jwtSecret'))});
