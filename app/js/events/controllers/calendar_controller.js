@@ -3,10 +3,6 @@
 module.exports = function(app) {
   app.controller('calendCtrl', ['$scope', '$http', '$cookies', '$location','userService', 'ResourceBackend', function($scope, $http, $cookies, $location, userService, ResourceBackend) {
     var calBackend = new ResourceBackend('events');
-//  app.controller('calendCtrl', ['$scope', '$http', '$cookies', '$location','ResourceAuth', 'ResourceBackend', function($scope, $http, $cookies, $location, ResourceAuth, ResourceBackend) {
-    // var calBackend = new ResourceBackend('events');
-    // var auth = new ResourceAuth();
-    // auth.signedIn($cookies);
 
     /*jshint sub:true*/
     $http.defaults.headers.common['jwt'] = $cookies.jwt;
@@ -24,7 +20,6 @@ module.exports = function(app) {
       userService.signedIn($cookies);
       $scope.currentEvent = currentEvent;
       $scope.show = true;
-      console.log($scope.currentEvent);
     };
 
     $scope.viewAll = function() {
@@ -35,7 +30,6 @@ module.exports = function(app) {
     $scope.invite = function() {
       userService.signedIn($cookies);
       var inviteObj = {friendInfo: $scope.user, eventInfo: $scope.currentEvent };
-      console.log(inviteObj);
       $scope.errors = [];
       $http({
         method: 'POST',
@@ -43,8 +37,6 @@ module.exports = function(app) {
         data: inviteObj
       })
       .success(function(data) {
-        console.log('success!');
-        console.log('THIS is $scope.user ', $scope.user);
         $scope.user = null;
         // $cookies.jwt = data.jwt;
         // $location.path('/calendar');

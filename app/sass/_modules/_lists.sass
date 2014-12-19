@@ -1,13 +1,41 @@
+.side-box
+  @include floats(35%)
+  h1
+    font-size: 2em
+
+.main-content
+  @include floats(45%)
+
 .list-items
   display: block
-  width: 80%
+  width: 100%
   border-bottom: 0.1em solid $color-default--3
   padding: 1em
-  margin-left: 5%
-  @media only screen and (min-width: 450px)
-    margin-left: 35%
-    width: 45%
   h1
     font-size: 1.3em
     margin-bottom: 0.3em
+    cursor: pointer
+    &:hover
+      color: $color-primary--3
+
+.city-image
+  background: url('../images/cityimage_seattle.jpg')
+  background-size: cover
+  background-position: 0% 10%
+  width: 100%
+  height: 3em
+  margin-bottom: 1em
+  @media only screen and (min-width: 450px)
+    height: 8em
+    background-position: 0 0
+
+/* hacks */
+
+.side-box--mobile-width
+  @media only screen and (max-width: 450px)
+    width: 90%
+
+.main-content--mobile-width
+  @media only screen and (max-width: 450px)
+    width: 80%
 

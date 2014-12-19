@@ -8,7 +8,7 @@ module.exports = function(app) {
     $scope.login = function() {
       $scope.errors = [];
 
-      userService.login($scope.user)
+      userService.loginService($scope.user)
       .success(function(data) {
         $cookies.jwt = data.jwt;
         $location.path('/calendar');
@@ -26,15 +26,12 @@ module.exports = function(app) {
       if (!newUser.email) return ({msg: 'did not specify an email'});
       if (!newUser.password) return ({msg: 'did not specify a password'});
 
-      console.log('hullo');
       if ($scope.errors.length) return;
 
-      userService.signUp($scope.newUser)
-
+      userService.signUpService(newUser, $cookies)
       .error(function(data) {
         $scope.errors.push(data);
       });
-
     };
   }]);
 };

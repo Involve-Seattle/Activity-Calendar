@@ -34,6 +34,19 @@ describe('login controller', function() {
       $httpBackend.verifyNoOutstandingRequest();
     });
 
+    it('should make a POST request to user', function() {
+      $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
+      $scope.newUser = {
+        email: 'test@example.com',
+        password: 'Test1@',
+        passwordConfirmation: 'Test1@'
+      };
+      $scope.signUp();
+      $httpBackend.flush();
+
+      expect($cookies.jwt).toEqual('1');
+    });
+
     it('should make a GET request to users', function() {
       $httpBackend.expectGET('/api/login').respond(200, jwt);
       $scope.user = {
@@ -45,19 +58,6 @@ describe('login controller', function() {
 
       expect($cookies.jwt).toEqual('1');
     });
-
-    // it('should make a POST request to user', function() {
-    //   $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
-    //   $scope.newUser = {
-    //     email: 'test@example.com',
-    //     password: 'Test1@',
-    //     passwordConfirmation: 'Test1@'
-    //   };
-    //   $scope.signUp();
-    //   $httpBackend.flush();
-
-    //   expect($cookies.jwt).toEqual('1');
-    // });
   });
 
   describe('user error handling', function() {

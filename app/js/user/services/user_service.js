@@ -4,9 +4,8 @@ module.exports = function(app) {
   app.factory('userService', ['$http', '$cookies', '$base64', '$location', '$rootScope', function($http, $cookies, $base64, $location, $rootScope) {
 
     return {
-      login: function(user) {
+      loginService: function(user) {
         $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(user.email + ':' + user.password); //jshint ignore:line
-
         return $http({
           method: 'GET',
           url: '/api/login',
@@ -14,7 +13,18 @@ module.exports = function(app) {
         });
       },
 
+<<<<<<< HEAD
       signUp: function(newUser) {
+=======
+      signUpService: function(newUser, $cookies) {
+        if (newUser.password !== newUser.passwordConfirmation || newUser.password === undefined) {
+          return ({msg: 'password and confirmation did not match'});
+        }
+        if (!newUser.email) {
+          return ({msg: 'did not specify an email'});
+        }
+
+>>>>>>> 2d591e81d1823d64fb9f4dc221584a9a0b2d7329
         var newUserEncoded = {};
         newUserEncoded.email = $base64.encode(newUser.email);
         newUserEncoded.password = $base64.encode(newUser.password);
@@ -25,16 +35,14 @@ module.exports = function(app) {
           data: newUserEncoded
         })
         .success(function(data) {
-          console.log('hi from success');
           $cookies.jwt = data.jwt;
-          console.log('cookies in success' + $cookies.jwt);
           $rootScope.user = {
             email: newUser.email,
             loggedin: true
           };
-          console.log('rootscope email, in success ' + $rootScope.user.email);
           $rootScope.$broadcast('user:loggedIn');
           $location.path('/calendar');
+          newUser.jwt = data.jwt;
         });
       },
 
@@ -45,7 +53,7 @@ module.exports = function(app) {
       },
 
       logout: function() {
-        $cookies.jwt = undefined;
+        delete $cookies.jwt;
         $rootScope.user = {
           email: null,
           loggedin: false
