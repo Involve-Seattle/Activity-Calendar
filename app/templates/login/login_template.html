@@ -2,7 +2,7 @@
   <img class='logo--centered' src='images/involve_logo_dark.svg'>
   <div data-ng-controller='loginCtrl' data-ng-init='index()'>
     <div>
-      <button data-ng-click='loggingIn = !loggingIn; signingUp = false'>Log In</button>
+      <button class='button--block' data-ng-click='loggingIn = !loggingIn; signingUp = false'>Log In</button>
       <div data-ng-show='loggingIn'>
         <form name='userLoginForm'>
           <input type='text' placeholder='email' data-ng-model='user.email' required/>

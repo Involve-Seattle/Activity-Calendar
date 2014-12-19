@@ -171,14 +171,29 @@ p {
 .list-items {
   display: block;
   width: 100%;
-  border-bottom: 0.1em solid #a6a6a6;
   padding: 1em; }
   .list-items h1 {
     font-size: 1.3em;
     margin-bottom: 0.3em;
     cursor: pointer; }
     .list-items h1:hover {
-      color: #126989; }
+      color: #126989;
+      cursor: default; }
+  .list-items .h1--no-hover:hover {
+    color: #468fa6; }
+  .list-items h2 {
+    font-family: 'quattrocento_sansregular', sans-serif;
+    font-size: 1.1em;
+    color: #468fa6;
+    margin-bottom: 0.3em; }
+  .list-items a {
+    display: block;
+    margin-top: 1em;
+    font-family: 'quattrocento_sansregular', sans-serif;
+    color: #468fa6; }
+
+.bottom-border {
+  border-bottom: 0.1em solid #a6a6a6; }
 
 .city-image {
   background: url('../images/cityimage_seattle.jpg');
@@ -212,7 +227,6 @@ input {
   margin: 0 auto 0.3em auto; }
 
 button {
-  display: block;
   position: relative;
   margin: 1em auto;
   padding: 1em 2.5em;
@@ -224,17 +238,26 @@ button {
   button:active {
     background-color: #468fa6; }
 
+.button--block {
+  display: block; }
+
+.element-inline-block {
+  display: inline-block;
+  vertical-align: top; }
+
 .button--emphasis {
   background-color: #468fa6;
   font-size: 2em;
-  padding: 0.8em; }
+  padding: 0.8em;
+  display: block; }
   .button--emphasis:active {
     background-color: #297b97; }
 
 .button--submit {
   background-color: #297b97;
   font-size: 0.8em;
-  padding: 0.6em; }
+  padding: 0.6em;
+  display: block; }
 
 .logo--centered {
   display: block;
