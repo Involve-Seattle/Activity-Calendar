@@ -33,7 +33,10 @@ module.exports = function(grunt) {
 
     clean: {
       dev: {
-        src: ['build/']
+        src: ['build/', 'prodBuild/']
+      },
+      prod: {
+        src: ['prodBuild/']
       }
     },
 
@@ -43,6 +46,12 @@ module.exports = function(grunt) {
         src: ['**/*.html', '**/*.css', 'images/**/*'],
         expand: true,
         dest: 'build/'
+      },
+      prod: {
+        cwd: 'app/',
+        src: ['**/*.html', '**/*.css', 'images/**/*'],
+        expand: true,
+        dest: 'prodBuild/'
       }
     },
 
@@ -50,6 +59,14 @@ module.exports = function(grunt) {
       dev: {
         src: ['app/js/**/*.js'],
         dest: 'build/bundle.js',
+        options: {
+          transform: ['debowerify']
+        }
+      },
+
+      prod: {
+        src: ['app/js/**/*.js'],
+        dest: 'prodBuild/bundle.js',
         options: {
           transform: ['debowerify']
         }
