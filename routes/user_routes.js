@@ -31,5 +31,4 @@ module.exports = function(app, passport) {
     var info = decode(req.body.user);
     res.json({jwt: info.generateToken(app.get('jwtSecret'))});
   });
-
 };

@@ -37,10 +37,10 @@ var eventsRouter = express.Router();
 eventsRouter.use(jwtauth);
 
 require('./routes/user_routes')(app, passport);
-require('./routes/generalEvents_routes')(app);
+require('./routes/generalEvents_routes')(eventsRouter);
 require('./routes/mymeets_routes')(app);
-require('./routes/invitation_routes')(app);
-// app.use('/', eventsRouter);
+require('./routes/invitation_routes')(eventsRouter);
+app.use('/', eventsRouter);
 
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {

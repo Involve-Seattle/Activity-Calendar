@@ -18,16 +18,16 @@ before(function(done) {
   User.remove({}, function(err) {
     if (err) return console.log(err + ' dusting');
     console.log('db cleared');
+    done();
   });
-  done();
 });
 
 after(function(done) {
   User.remove({}, function(err) {
     if (err) return console.log(err + ' dusting');
     console.log('db cleared');
+    done();
   });
-  done();
 });
 
 describe('create and login user', function() {
@@ -55,7 +55,7 @@ describe('create and login user', function() {
 
   it('should not let user submit blank password on signup', function(done) {
     chai.request('http://localhost:3000')
-    .post('/api/login')
+    .post('/api/newUser')
     .send({
       email: email,
       password: '',
