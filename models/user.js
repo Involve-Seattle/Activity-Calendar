@@ -5,20 +5,19 @@ var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
 
 var userSchema = mongoose.Schema({
-  name: String,
-  locations: [
-  {
-    cityName: String
-
-  }]
+  basic: {
+    email: {type: String, required: true},
+    password: {type: String, required: true}
+  },
+  locations: String
 });
 
 userSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(4), null);
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
+  return bcrypt.compareSync(password, this.basic.password);
 };
 
 userSchema.methods.generateToken = function(secret) {
@@ -27,7 +26,7 @@ userSchema.methods.generateToken = function(secret) {
   var expires = Date.now() + week;
   var _this = this;
   var token = jwt.encode({
-    iss. _this._id,
+    iss: _this._id,
     expire: expires
   }, secret);
   return token;
