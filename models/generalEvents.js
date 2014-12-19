@@ -13,17 +13,4 @@ var genEventSchema = mongoose.Schema({
 
 });
 
-// genEventSchema.methods.dailyBatch = function() {
-//   //set up feed
-
-//   //set timeout
-
-//   //call the database stuff
-
-// };
-
-// genEventSchema.methods.eventsToDatabase = function() {
-
-// };
-
 module.exports = mongoose.model('GeneralEvents', genEventSchema);
