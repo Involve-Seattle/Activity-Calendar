@@ -13,6 +13,13 @@ app.use(bodyParser.json());
 console.log(process.env.BUILD_KEY);
 app.use(express.static(__dirname + '/build'));
 
+// if (process.env.BUILD_KEY === 'build') {
+//   app.use(express.static(__dirname + '/build'));
+// }
+// if (process.env.BUILD_KEY === 'production') {
+//   app.use(express.static(__dirname + '/prodBuild'));
+// }
+
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/mymeetings_development');
 
 var db = mongoose.connection;
