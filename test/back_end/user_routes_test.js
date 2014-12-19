@@ -18,16 +18,16 @@ before(function(done) {
   User.remove({}, function(err) {
     if (err) return console.log(err + ' dusting');
     console.log('db cleared');
-  });
   done();
+  });
 });
 
 after(function(done) {
   User.remove({}, function(err) {
     if (err) return console.log(err + ' dusting');
     console.log('db cleared');
-  });
   done();
+  });
 });
 
 describe('create and login user', function() {
@@ -48,14 +48,14 @@ describe('create and login user', function() {
         expect(user).to.not.eql(undefined);
         expect(user).to.have.property('locations');
         expect(user.locations).to.eql('testCity');
+        done();
       });
-      done();
     });
   });
 
   it('should not let user submit blank password on signup', function(done) {
     chai.request('http://localhost:3000')
-    .post('/api/login')
+    .post('/api/newUser')
     .send({
       email: email,
       password: '',
