@@ -28,10 +28,10 @@ describe('userService', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should make a get request to user', function() {
-    $httpBackend.expectGET('/api/login').respond(200, jwt);
-
-    userServiceTest.loginService(newUser)
+  it('should make a post request to create a new user', function() {
+    $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
+    newUser.passwordConfirmation = newUser.password;
+    userServiceTest.signUpService(newUser, $cookies)
     .success(function(data) {
       expect(data.jwt).toEqual('1');
     });
@@ -39,10 +39,10 @@ describe('userService', function() {
     $httpBackend.flush();
   });
 
-  it('should make a post request to user', function() {
-    $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
-    newUser.passwordConfirmation = newUser.password;
-    userServiceTest.signUpService(newUser, $cookies)
+  it('should make a get request to log in an existing user', function() {
+    $httpBackend.expectGET('/api/login').respond(200, jwt);
+
+    userServiceTest.loginService(newUser, $cookies)
     .success(function(data) {
       expect(data.jwt).toEqual('1');
     });

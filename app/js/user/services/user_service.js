@@ -4,12 +4,21 @@ module.exports = function(app) {
   app.factory('userService', ['$http', '$cookies', '$base64', '$location', '$rootScope', function($http, $cookies, $base64, $location, $rootScope) {
 
     return {
-      loginService: function(user) {
+      loginService: function(user, $cookies) {
         $http.defaults.headers.common.Authorization = 'Basic ' + $base64.encode(user.email + ':' + user.password); //jshint ignore:line
         return $http({
           method: 'GET',
           url: '/api/login',
           data: user
+        })
+        .success(function(data) {
+          $cookies.jwt = data.jwt;
+          $rootScope.user = {
+            email: user.email,
+            loggedin: true
+          };
+          $rootScope.$broadcast('user:loggedIn');
+          $location.path('/calendar');
         });
       },
 
@@ -39,7 +48,6 @@ module.exports = function(app) {
           };
           $rootScope.$broadcast('user:loggedIn');
           $location.path('/calendar');
-          newUser.jwt = data.jwt;
         });
       },
 
