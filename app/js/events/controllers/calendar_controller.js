@@ -12,7 +12,6 @@ module.exports = function(app) {
       calBackend.index()
       .success(function(data) {
         $scope.events = data;
-        //console.log(data);
       });
     };
 
