@@ -1,5 +1,5 @@
 <div>
-  <h1>HELLO!!</h1>
+  <img class='logo--centered' src='images/involve_logo_dark.svg'>
   <div data-ng-controller='loginCtrl' data-ng-init='index()'>
     <div>
       <button data-ng-click='loggingIn = !loggingIn; signingUp = false'>Log In</button>
@@ -7,20 +7,21 @@
         <form name='userLoginForm'>
           <input type='text' placeholder='email' data-ng-model='user.email' required/>
           <input type='password' placeholder='password' data-ng-model='user.password' required/>
-          <button data-ng-click='login()'>Get involved!</button>
+          <button class='button--submit' data-ng-click='login()'>Get involved!</button>
         </form>
       </div>
     </div>
 
     <div>
-      <button data-ng-click='signingUp = !signingUp; loggingIn = false'>Sign Up</button>
+      <button class='button--emphasis' data-ng-click='signingUp = !signingUp; loggingIn = false'>Sign Up</button>
       <div data-ng-show='signingUp'>
         <form name='newUserForm'>
           <input type='text' placeholder='email' data-ng-model='newUser.email' required/>
           <input type='password' name='password' placeholder='password' data-ng-model='newUser.password' data-ng-pattern='/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/' required/>
           <input type='password' placeholder='confirm password' data-ng-model='newUser.passwordConfirmation' required/>
           <input type='text' placeholder='city' data-ng-model='newUser.locations'>
-          <button data-ng-click='signUp()'>Get Involved!</button>
+          <button class='button--submit' data-ng-click='signUp()'>Get Involved!</button>
+          <p>Passwords must be at least 5 characters and contain one uppercase letter and one number.</p>
         </form>
       </div>
     </div>
