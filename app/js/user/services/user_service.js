@@ -17,7 +17,7 @@ module.exports = function(app) {
         var newUserEncoded = {};
         newUserEncoded.email = $base64.encode(newUser.email);
         newUserEncoded.password = $base64.encode(newUser.password);
-        newUserEncoded.location = newUser.locations;
+        newUserEncoded.locations = newUser.locations;
 
         return $http({
           method: 'POST',
