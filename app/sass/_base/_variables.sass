@@ -1,0 +1,50 @@
+// Global Config
+
+// Font Stacks
+
+@font-face
+  font-family: 'kreonregular'
+  src: url('fonts/kreon-regular-webfont.eot')
+  src: url('fonts/kreon-regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/kreon-regular-webfont.woff2') format('woff2'), url('fonts/kreon-regular-webfont.woff') format('woff'), url('fonts/kreon-regular-webfont.ttf') format('truetype'), url('fonts/kreon-regular-webfont.svg#kreonregular') format('svg')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'quattrocento_sansregular'
+  src: url('fonts/quattrocentosans-regular-webfont.eot')
+  src: url('fonts/quattrocentosans-regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/quattrocentosans-regular-webfont.woff2') format('woff2'), url('fonts/quattrocentosans-regular-webfont.woff') format('woff'), url('fonts/quattrocentosans-regular-webfont.ttf') format('truetype'), url('fonts/quattrocentosans-regular-webfont.svg#quattrocento_sansregular') format('svg')
+  font-weight: normal
+  font-style: normal
+
+$font-family--headings    : 'kreonregular', serif
+$font-family--body        : 'quattrocento_sansregular', sans-serif
+
+// Color Usage
+
+$color-primary--1    : #054154
+$color-primary--2    : #07556e
+$color-primary--3    : #126989
+$color-primary--4    : #297b97
+$color-primary--5    : #468fa6
+$color-primary--6    : lighten(#468fa6, 30)
+$color-primary--7    : lighten(#468fa6, 40)
+$color-primary--8    : lighten(#468fa6, 45)
+$color-secondary--1  : #861c19
+$color-secondary--2  : #af2424
+$color-tertiary--1   : #fffbf2
+$color-tertiary--2   : lighten(#fffbf2, 30)
+$color-negative--1   : white
+$color-default--1    : black
+$color-default--2    : lighten(black, 40)
+$color-default--3    : lighten(black, 65)
+
+body
+  background-color: $color-primary--7
+
+h1
+  font-family: $font-family--headings
+  color: $color-primary--5
+
+p
+  font-family: $font-family--body
+  color: $color-default--2

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Cicero-vote/Activity-Calendar.svg)](https://travis-ci.org/Cicero-vote/Activity-Calendar)
+[![Build Status](https://travis-ci.org/Involve-Seattle/Activity-Calendar.svg?branch=dev)](https://travis-ci.org/Involve-Seattle/Activity-Calendar)
 
 Activity-Calendar
 =================
