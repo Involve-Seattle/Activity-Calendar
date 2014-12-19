@@ -43,10 +43,10 @@ describe('timer on the getRssFeed', function() {
     var spy = sinon.spy();
 
     setTimeout(function() {
-      getRSS.getFeed(spy);
-    }, 86500000);
+      getRSS.saveToDB(spy);
+    }, 86400000);
 
-    this.clock.tick(86300000);
+    this.clock.tick(86339999);
     expect(spy).to.not.be.called;
 
     this.clock.tick(3);
