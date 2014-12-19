@@ -9,7 +9,6 @@
 .list-items
   display: block
   width: 100%
-  border-bottom: 0.1em solid $color-default--3
   padding: 1em
   h1
     font-size: 1.3em
@@ -17,6 +16,22 @@
     cursor: pointer
     &:hover
       color: $color-primary--3
+      cursor: default
+  .h1--no-hover:hover
+    color: $color-primary--5
+  h2
+    font-family: $font-family--body
+    font-size: 1.1em
+    color: $color-primary--5
+    margin-bottom: 0.3em
+  a
+    display: block
+    margin-top: 1em
+    font-family: $font-family--body
+    color: $color-primary--5
+
+.bottom-border
+  border-bottom: 0.1em solid $color-default--3
 
 .city-image
   background: url('../images/cityimage_seattle.jpg')
