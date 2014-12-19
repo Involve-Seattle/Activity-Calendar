@@ -33,7 +33,10 @@ module.exports = function(grunt) {
 
     clean: {
       dev: {
-        src: ['build/']
+        src: ['build/', 'prodBuild/']
+      },
+      prod: {
+        src: ['prodBuild/']
       }
     },
 
@@ -43,6 +46,12 @@ module.exports = function(grunt) {
         src: ['**/*.html', '**/*.css', 'images/**/*', 'fonts/**/*'],
         expand: true,
         dest: 'build/'
+      },
+      prod: {
+        cwd: 'app/',
+        src: ['**/*.html', '**/*.css', 'images/**/*'],
+        expand: true,
+        dest: 'prodBuild/'
       }
     },
 
@@ -50,6 +59,14 @@ module.exports = function(grunt) {
       dev: {
         src: ['app/js/**/*.js'],
         dest: 'build/bundle.js',
+        options: {
+          transform: ['debowerify']
+        }
+      },
+
+      prod: {
+        src: ['app/js/**/*.js'],
+        dest: 'prodBuild/bundle.js',
         options: {
           transform: ['debowerify']
         }
@@ -93,6 +110,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build:dev', ['clean:dev', 'browserify:dev', 'copy:dev']);
+  grunt.registerTask('build:prod', ['clean:prod', 'browserify:prod', 'copy:prod']);
   grunt.registerTask('test:client', ['browserify:test', 'karma:unit']);
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', 'test:client']);
   grunt.registerTask('styles', ['sass']);
