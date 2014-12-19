@@ -55,12 +55,32 @@ p {
   font-family: 'quattrocento_sansregular', sans-serif;
   color: #666666; }
 
+.clearfix {
+  overflow: auto; }
+
+.extra-margin-left {
+  margin-left: 0; }
+  @media only screen and (min-width: 450px) {
+    .extra-margin-left {
+      margin-left: 1em; } }
+
 .site-banner {
   background-color: #468fa6;
   width: 100%;
   margin: 0 0 2em 0;
   padding: 0;
   border-bottom: 0.4em solid #af2424; }
+
+.logo {
+  width: 8em;
+  margin: 0.2em 0 0 0.3em;
+  padding: 0; }
+  @media only screen and (min-width: 450px) {
+    .logo {
+      width: 10em; } }
+  @media only screen and (min-width: 1000px) {
+    .logo {
+      width: 12em; } }
 
 .responsive-menu {
   float: right;
@@ -69,6 +89,7 @@ p {
   .responsive-menu ul {
     position: absolute;
     list-style: none;
+    z-index: 1;
     left: -9999px;
     /* Hide off-screen when not needed (this is more accessible than display:none;) */ }
     .responsive-menu ul li {
@@ -104,17 +125,6 @@ p {
   .responsive-menu:hover ul li:hover a {
     background-color: #aacfdb; }
 
-.logo {
-  width: 8em;
-  margin: 0.2em 0 0 0.3em;
-  padding: 0; }
-  @media only screen and (min-width: 450px) {
-    .logo {
-      width: 10em; } }
-  @media only screen and (min-width: 1000px) {
-    .logo {
-      width: 12em; } }
-
 .menu-button {
   position: absolute;
   width: 3em;
@@ -129,16 +139,96 @@ p {
       width: 4em;
       margin: 1.5em 1.8em 0 0; } }
 
+.main-container {
+  width: 100%;
+  margin: 2% 20% 5% 4%; }
+  @media only screen and (min-width: 450px) {
+    .main-container {
+      padding: 5% 5% 5% 5%; } }
+
+.site-footer {
+  margin-top: 5%;
+  padding: 2em; }
+  .site-footer p {
+    font-size: 0.8em;
+    text-align: center; }
+
+.side-box {
+  width: 100%;
+  float: none;
+  position: relative; }
+  @media only screen and (min-width: 450px) {
+    .side-box {
+      width: 35%;
+      float: left; } }
+  .side-box h1 {
+    font-size: 2em; }
+
+.main-content {
+  width: 100%;
+  float: none;
+  position: relative; }
+  @media only screen and (min-width: 450px) {
+    .main-content {
+      width: 45%;
+      float: left; } }
+
 .list-items {
   display: block;
-  width: 80%;
+  width: 100%;
   border-bottom: 0.1em solid #a6a6a6;
-  padding: 1em;
-  margin-left: 5%; }
-  @media only screen and (min-width: 450px) {
-    .list-items {
-      margin-left: 35%;
-      width: 45%; } }
+  padding: 1em; }
   .list-items h1 {
     font-size: 1.3em;
     margin-bottom: 0.3em; }
+
+.city-image {
+  background: url('../images/cityimage_seattle.jpg');
+  background-size: cover;
+  background-position: 0% 10%;
+  width: 100%;
+  height: 3em;
+  margin-bottom: 1em; }
+  @media only screen and (min-width: 450px) {
+    .city-image {
+      height: 8em;
+      background-position: 0 0; } }
+
+/* hacks */
+@media only screen and (max-width: 450px) {
+  .side-box--mobile-width {
+    width: 90%; } }
+
+@media only screen and (max-width: 450px) {
+  .main-content--mobile-width {
+    width: 80%; } }
+
+.access {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  text-align: center; }
+  .access .access_login {
+    display: block;
+    margin: 5%; }
+  .access .access_signup {
+    display: block;
+    margin: 5%; }
+  .access .access-p {
+    font-size: 3em; }
+
+form {
+  margin: 1.5em; }
+
+button {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  padding: 1em 2.5em;
+  background-color: #aacfdb;
+  color: #fffbf2;
+  button: active;
+  button-background-color: #468fa6; }
