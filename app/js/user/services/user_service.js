@@ -13,9 +13,6 @@ module.exports = function(app) {
         });
       },
 
-<<<<<<< HEAD
-      signUp: function(newUser) {
-=======
       signUpService: function(newUser, $cookies) {
         if (newUser.password !== newUser.passwordConfirmation || newUser.password === undefined) {
           return ({msg: 'password and confirmation did not match'});
@@ -24,7 +21,6 @@ module.exports = function(app) {
           return ({msg: 'did not specify an email'});
         }
 
->>>>>>> 2d591e81d1823d64fb9f4dc221584a9a0b2d7329
         var newUserEncoded = {};
         newUserEncoded.email = $base64.encode(newUser.email);
         newUserEncoded.password = $base64.encode(newUser.password);
@@ -48,8 +44,6 @@ module.exports = function(app) {
 
       signedIn: function($cookies) {
         if (!$cookies.jwt || !$cookies.jwt.length) return $location.path('/login');
-        // console.log('user logged in');
-        // $location.path('/calendar');
       },
 
       logout: function() {
