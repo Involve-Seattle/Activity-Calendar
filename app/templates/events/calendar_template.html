@@ -1,11 +1,11 @@
 
 <div class="main-container clearfix">
-  <section class="side-box side-box--mobile-width">
-    <figure class="city-image"></figure>
-    <h1>Seattle</h1>
-  </section>
-  <section class="main-content extra-margin-left main-content--mobile-width">
-    <div data-ng-controller="calendCtrl" data-ng-init="index()">
+  <div data-ng-controller="calendCtrl" data-ng-init="index()">
+    <section class="side-box side-box--mobile-width">
+      <figure class="city-image"></figure>
+      <h1>Seattle</h1>
+    </section>
+    <section class="main-content extra-margin-left main-content--mobile-width">
       <div data-ng-repeat="event in events" class="flex-items">
         <div data-ng-hide="show" data-ng-click="viewLarge(event)">
           <section class="list-items">
