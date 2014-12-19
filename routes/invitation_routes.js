@@ -9,12 +9,11 @@ module.exports = function(app) {
     if (!(validator.isEmail(req.body.friendInfo.friendEmail))) {
       return res.status(500).send('that is not a valid email');
     }
-    console.log(req.body);
     sendgrid.send({
       to: req.body.friendInfo.friendEmail,
       from: 'involve.herokuapp@gmail.com',
       subject: 'A Friend Has Invited You to a Meeting!',
-      html: '<h4>' + req.body.friendInfo.friendMessage + '</h4><h3>' + req.body.eventInfo.eventTitle + '</h3><p>' + req.body.eventInfo.eventDate + '<p>'
+      html: '<h3>' + req.body.friendInfo.friendMessage + '</h3><h2>' + req.body.eventInfo.eventTitle + '</h2><p>' + req.body.eventInfo.eventDate + '</p><a href=' + '"' + req.body.eventInfo.eventUrl + '">seattle.gov</a>'
     }, function(err, json) {
       if (err) { return console.error(err); }
       res.send(json);

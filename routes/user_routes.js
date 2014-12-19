@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
   app.post('/api/newUser', function(req, res) {
     var info = decode(req.body);
 
-    User.findOne({email: info.email}, function(err, user) {
+    User.findOne({'basic.email': info.email}, function(err, user) {
       if (err) return res.status(500).send('server error');
       //check if user already exists
       if (user) return res.status(500).send('cannot create that user');
