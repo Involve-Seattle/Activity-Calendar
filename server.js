@@ -3,7 +3,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-require('./lib/getRssFeed')();
+var GetRSS = require('./lib/getRssFeed');
 
 var passport = require('passport');
 
@@ -44,10 +44,10 @@ app.use('/', eventsRouter);
 
 app.set('port', process.env.PORT || 3000);
 
-// setInterval(function dailyGetRSS() {
-//   var event = new Event();
-//   event.getRSS()
-// }, 8640000);
+(function() {
+  var getRss = new GetRSS();
+  getRss.getFeed();
+}());
 
 app.listen(app.get('port'), function() {
   console.log('listening to ' + app.get('port'));
