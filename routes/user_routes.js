@@ -28,7 +28,6 @@ module.exports = function(app, passport) {
   });
 
   app.get('/api/login', passport.authenticate('basic', {session: false}), function(req, res) {
-    var info = decode(req.body.user);
-    res.json({jwt: info.generateToken(app.get('jwtSecret'))});
+    res.json({jwt: req.user.generateToken(app.get('jwtSecret'))});
   });
 };

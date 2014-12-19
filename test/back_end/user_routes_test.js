@@ -10,9 +10,9 @@ require('../../server');
 
 var expect = chai.expect;
 
-var email = new Buffer('test@example.com', 'ascii').toString('base64');
+var email = new Buffer('testYourself@example.com', 'ascii').toString('base64');
 var password = new Buffer('Test2@', 'ascii').toString('base64');
-var authorization = 'Basic ' + new Buffer('test@example.com:Test2@', 'ascii').toString('base64');
+var authorization = 'Basic ' + new Buffer('testYourself@example.com:Test2@', 'ascii').toString('base64');
 
 before(function(done) {
   User.remove({}, function(err) {
@@ -31,8 +31,7 @@ after(function(done) {
 });
 
 describe('create and login user', function() {
-
-  it('should create a user!', function(done) {
+  it('should create a user', function(done) {
     chai.request('http://localhost:3000')
     .post('/api/newUser')
     .send({
@@ -44,7 +43,7 @@ describe('create and login user', function() {
     .end(function(err, res) {
       expect(err).to.eql(null);
       expect(res.body).to.have.property('jwt');
-      User.findOne({email: 'test@example.com'}, function(err, user) {
+      User.findOne({locations: 'testCity'}, function(err, user) {
         expect(user).to.not.eql(undefined);
         expect(user).to.have.property('locations');
         expect(user.locations).to.eql('testCity');
