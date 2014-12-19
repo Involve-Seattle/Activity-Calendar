@@ -11,8 +11,8 @@ require('../../server');
 var expect = chai.expect;
 
 var email = new Buffer('test@example.com', 'ascii').toString('base64');
-var password = new Buffer('Test1@', 'ascii').toString('base64');
-var authorization = 'Basic ' + new Buffer('test@example.com:Test1@', 'ascii').toString('base64');
+var password = new Buffer('Test2@', 'ascii').toString('base64');
+var authorization = 'Basic ' + new Buffer('test@example.com:Test2@', 'ascii').toString('base64');
 
 before(function(done) {
   User.remove({}, function(err) {
@@ -32,7 +32,7 @@ after(function(done) {
 
 describe('create and login user', function() {
 
-  it('should create a user', function(done) {
+  it('should create a user!', function(done) {
     chai.request('http://localhost:3000')
     .post('/api/newUser')
     .send({
@@ -48,8 +48,8 @@ describe('create and login user', function() {
         expect(user).to.not.eql(undefined);
         expect(user).to.have.property('locations');
         expect(user.locations).to.eql('testCity');
+        done();
       });
-      done();
     });
   });
 
