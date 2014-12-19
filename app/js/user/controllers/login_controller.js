@@ -8,11 +8,7 @@ module.exports = function(app) {
     $scope.login = function() {
       $scope.errors = [];
 
-      userService.loginService($scope.user)
-      .success(function(data) {
-        $cookies.jwt = data.jwt;
-        $location.path('/calendar');
-      })
+      userService.loginService($scope.user, $cookies)
       .error(function(data) {
         $scope.errors.push(data);
       });
