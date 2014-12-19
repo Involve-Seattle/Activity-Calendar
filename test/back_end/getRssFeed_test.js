@@ -33,13 +33,10 @@ describe('timer on the getRssFeed', function() {
   before(function() {
     this.clock = sinon.useFakeTimers();
     getRSS = new GetRSS();
-    // mock = sinon.mock(getRSS);
   });
 
   after(function() {
     this.clock.restore();
-    // mock.verify;
-    // mock.restore;
   });
 
   it('gets the feed and calls the saveToDB function once a day', function() {
@@ -55,5 +52,4 @@ describe('timer on the getRssFeed', function() {
     this.clock.tick(3);
     expect(spy).to.be.called;
   });
-
 });
