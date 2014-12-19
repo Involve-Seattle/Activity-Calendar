@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "homepage": "https://github.com/Event-Sync/server-notes",
   "authors": [
-    "Jacob Shafer <jacshfr@gmail.com>"
+    "Chareesa Graham <chareesagraham@gmail.com, Henok Kidane <henok1983@gmail.com>, Stephanie Lingwood <stephanielingwood@gmail.com>, Jacob Shafer <jacshfr@gmail.com>, Sheyna Watkins <sheynawatkins@gmail.com>"
   ],
-  "license": "MIT",
+  "license": "ISC",
   "ignore": [
     "**/.*",
     "node_modules",

@@ -50,3 +50,5 @@ We know we cannot reach the nation from the get-go so we are starting with just 
 * Weighing the pros and cons of cards versus tiles
 * CSS positioning and display
 * Effectively coordinating UX and JavaScript devs (and build environments)
+
+Created by Chareesa Graham, Henok Kidane, Stephanie Lingwood, Jacob Shafer and Sheyna Watkins; a project for Code Fellows
