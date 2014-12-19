@@ -28,7 +28,7 @@ We know we cannot reach the nation from the get-go so we are starting with just 
 * More cities/regions
 * A search function
 * Ability to lookup elected officials
-* More sophisticated indexing to finding local leaders and agencies based on user's zip code.
+* More sophisticated indexing to finding local leaders and agencies based on user's zip code
 
 [![Build Status](https://travis-ci.org/Involve-Seattle/Activity-Calendar.svg?branch=dev)](https://travis-ci.org/Involve-Seattle/Activity-Calendar)
 
