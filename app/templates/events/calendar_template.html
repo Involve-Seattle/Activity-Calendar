@@ -1,15 +1,21 @@
 
-<div class="flex-container">
+<div class="main-container clearfix">
   <div data-ng-controller="calendCtrl" data-ng-init="index()">
-    <div data-ng-repeat="event in events" class="flex-items">
-      <div data-ng-hide="show" data-ng-click="viewLarge(event)">
-        <section class="list-items">
-          <h1>{{event.eventTitle}}</h1>
-          <p>{{event.eventAddress}}</p>
-          <p>{{event.eventDate}}</p>
-        </section>
+    <section class="side-box side-box--mobile-width">
+      <figure class="city-image"></figure>
+      <h1>Seattle</h1>
+    </section>
+    <section class="main-content extra-margin-left main-content--mobile-width">
+      <div data-ng-repeat="event in events" class="flex-items">
+        <div data-ng-hide="show" data-ng-click="viewLarge(event)">
+          <section class="list-items">
+            <h1>{{event.eventTitle}}</h1>
+            <p>{{event.eventAddress}}</p>
+            <p>{{event.eventDate}}</p>
+          </section>
+        </div>
       </div>
-    </div>
+    </section>
     <div data-ng-show='show'>
       <div>
         <button data-ng-click="viewAll()">View All</button>
@@ -23,7 +29,6 @@
             </form>
           </div>
         </div>
-
         <h1>{{currentEvent.eventTitle}}</h1>
         <!-- <p>{{event.eventContent}}</p> -->
         <!-- <p>{{event.eventContentLong}}</p> -->
@@ -37,7 +42,11 @@
       </div>
     </div>
   </div>
-</div>
-
+</div> <!-- closes main-container -->
+<footer>
+  <div class="site-footer">
+    <p>A Project for Code Fellows by Jacob Shafer, Chareesa Graham, Stephanie Lingwood, Sheyna Watkins and Henok Kidane</p>
+  </div>
+</footer>
 
 

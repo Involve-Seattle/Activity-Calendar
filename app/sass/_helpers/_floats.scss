@@ -1,0 +1,9 @@
+@mixin floats($width) {
+  width: 100%;
+  float: none;
+  position: relative;
+  @media only screen and (min-width: 450px) {
+    width: $width;
+    float: left;
+  }
+}
