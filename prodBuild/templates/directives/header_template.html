@@ -2,8 +2,8 @@
 
   <div class="navbar">
     <nav class="responsive-menu">
-      <img class="menu-button" src="images/menu.svg">
-      <ul>
+      <img class="menu-button" src="images/menu.svg" data-ng-click="showMenu = !showMenu">
+      <ul data-ng-if="showMenu" class="responsive-menu">
         <li ng-click="calendar()"><a href>Calendar</a></li>
         <li ng-click="mymeetings()"><a href>My Meetings</a></li>
         <li ng-click="logout()"><a href>Logout</a></li>
