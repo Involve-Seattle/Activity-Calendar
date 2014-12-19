@@ -10,7 +10,6 @@ var passport = require('passport');
 var app = express();
 
 app.use(bodyParser.json());
-console.log(process.env.BUILD_KEY);
 
 if (process.env.BUILD_KEY === 'build') {
   app.use(express.static(__dirname + '/build'));
