@@ -1,83 +1,83 @@
 'use strict';
 
 module.exports = function(grunt) {
-
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-express-server');
-  grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-simple-mocha');
+  grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browserify');
-  // grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-sass');
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-
-    project: {
-      app: ['app'],
-      scss: ['<%= project.app %>/sass/style.scss'],
-      css: ['<%= project.app %>/css/**/*.css'],
-      alljs: ['<%= project.app %>/js/**/*.js']
+    jshint: {
+      all: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js'],
+      options: {
+        jshintrc: true,
+        ignores: ['public/jquery-1.11.1.js']
+      }
     },
 
-    // wiredep: {
-    //   task: {
-    //     src: [
-    //         '<%= project.app %>/*.html',
-    //         '<%= project.app %>/sass/style.scss'
-    //     ]
-    //   }
-    // },
+    jscs: {
+      src: ['models/**/*.js', 'server.js', 'routes/**/*.js', 'app/**/*.js', '!app/js/events/controllers/calendar_controller.js', '!app/js/user/services/user_service.js'],
+      options: {
+        config: '.jscsrc'
+      }
+    },
+
+    simplemocha: {
+      src: ['test/back_end/*.js']
+    },
 
     clean: {
       dev: {
-        src: ['build/']
+        src: ['build/', 'prodBuild/']
+      },
+      prod: {
+        src: ['prodBuild/']
       }
     },
 
     copy: {
       dev: {
-        expand: true,
         cwd: 'app/',
-        src: ['*.html', '<%= project.css %>','<%= project.app %>/css/*.css.map'],
-        dest: 'build/',
-        filter: 'isFile'
-      }
-    },
-
-    jshint: {
-      all: ['<%= project.alljs %>','Gruntfile.js','server.js'],
-      options: {
-        jshintrc: true
-      }
-    },
-
-    jscs: {
-      src: ['<%= project.alljs %>','server.js','Gruntfile.js'],
-      options: {
-        config: '.jscsrc',
+        src: ['**/*.html', '**/*.css', 'images/**/*', 'fonts/**/*'],
+        expand: true,
+        dest: 'build/'
+      },
+      prod: {
+        cwd: 'app/',
+        src: ['**/*.html', '**/*.css', 'images/**/*'],
+        expand: true,
+        dest: 'prodBuild/'
       }
     },
 
     browserify: {
       dev: {
+        src: ['app/js/**/*.js'],
+        dest: 'build/bundle.js',
         options: {
-          transform: ['debowerify'],
-          debug: true
-        },
-        src: ['<%= project.alljs %>'],
-        dest: 'build/js/app.js'
+          transform: ['debowerify']
+        }
       },
-      frontEndTest: {
+
+      prod: {
+        src: ['app/js/**/*.js'],
+        dest: 'prodBuild/bundle.js',
         options: {
-          transform: ['debowerify'],
-          debug: true
-        },
-        src: ['test/front-end/**/*test.js'],
-        dest: 'test/testbundle.js'
+          transform: ['debowerify']
+        }
+      },
+
+      test: {
+        src: ['test/front_end/*.js'],
+        dest: 'test/testbundle.js',
+        options: {
+          transform: ['debowerify']
+        }
       }
     },
 
@@ -88,72 +88,31 @@ module.exports = function(grunt) {
       continuous: {
         configFile: 'karma.conf.js',
         singleRun: true,
-        browsers: [ 'PhantomJS' ]
-      },
+        browsers: ['PhantomJS']
+      }
     },
-
     sass: {
-      dev: {
-        options: {
-          style: 'expanded',
-          compass: false
-        },
+      dist: {
         files: {
-          'build/css/style.css':'<%= project.scss %>'
+          'app/sass/styles.css': 'app/sass/styles.scss'
         }
       }
     },
-
-    express: {
-      options: {
-         // Override defaults here
-         output: 'listening'
-      },
-      dev: {
-        options: {
-          script: 'server.js'
-        }
-      },
-      prod: {
-         options: {
-           script: 'server.js',
-           node_env: 'production'
-        }
-      },
-      test: {
-        options: {
-          script: 'server.js',
-          node_env: 'test'
-        }
-      }
-    },
-
     watch: {
-      sass: {
-        files: '<%= project.app %>/sass/{,*/}*.{scss,sass}',
-        tasks: ['build']
-      },
-      express: {
-        files:  [ 'server.js','app/index.html' ],
-        tasks:  [ 'build', 'express:dev' ],
+      source: {
+        files: ['app/sass/**/*.scss', 'app/sass/**/*.sass'],
+        tasks: ['sass'],
         options: {
-          spawn: false
+          livereload: true
         }
-      },
-      app: {
-        files: [ '<%= project.alljs %>' ],
-        tasks: [ 'browserify:dev' ]
-      },
-      test: {
-        files: [ '<%= project.alljs %>', 'test/front-end/**/*.js'],
-        tasks: [ 'build:dev', 'browserify:frontEndTest', 'karma:unit']
       }
     }
-  }); //end initConfig
+  });
 
-  grunt.registerTask('build', ['clean:dev', 'sass:dev', 'browserify:dev', 'copy:dev']);
-  grunt.registerTask('test', ['build:dev', 'browserify:frontEndTest','karma:unit']);
-  grunt.registerTask('default', ['test','watch']);
-  grunt.registerTask('serve', [ 'build:dev', 'express:dev', 'watch' ]);
-
+  grunt.registerTask('build:dev', ['clean:dev', 'browserify:dev', 'copy:dev']);
+  grunt.registerTask('build:prod', ['clean:prod', 'browserify:prod', 'copy:prod']);
+  grunt.registerTask('test:client', ['browserify:test', 'karma:unit']);
+  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', 'test:client']);
+  grunt.registerTask('styles', ['sass']);
+  grunt.registerTask('default', ['test', 'styles', 'build:dev']);
 };
