@@ -1,31 +1,40 @@
-.access
-  margin-left: auto
-  margin-right: auto
-  position: relative
-  text-align: center
-  .access_login
-    display: block
-    margin: 5%
-  .access_signup
-    display: block
-    margin: 5%
-  .access-p
-    font-size: 3em
-
 form
-  margin: 1.5em
+  p
+    font-size: 0.8em
+    text-align: center
+    width: 15em
+    margin: 0 auto
+
+input
+  display: block
+  margin: 0 auto 0.3em auto
 
 button
   display: block
   position: relative
-  margin-left: auto
-  margin-right: auto
-  margin-bottom: 1em
-  margin-top: 1em
+  margin: 1em auto
   padding: 1em 2.5em
+  border: 0
   background-color: $color-primary--6
   color: $color-tertiary--1
-  button: active
+  font-family: $font-family--body
+  font-size: 1.2em
+  &:active
     background-color: $color-primary--5
 
+.button--emphasis
+  background-color: $color-primary--5
+  font-size: 2em
+  padding: 0.8em
+  &:active
+    background-color: $color-primary--4
 
+.button--submit
+  background-color: $color-primary--4
+  font-size: 0.8em
+  padding: 0.6em
+
+.logo--centered
+  display: block
+  margin: 6em auto 1em auto
+  width: 10em
