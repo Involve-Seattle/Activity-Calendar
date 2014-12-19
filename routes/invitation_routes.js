@@ -9,7 +9,6 @@ module.exports = function(app) {
     if (!(validator.isEmail(req.body.friendInfo.friendEmail))) {
       return res.status(500).send('that is not a valid email');
     }
-    console.log(req.body);
     sendgrid.send({
       to: req.body.friendInfo.friendEmail,
       from: 'involve.herokuapp@gmail.com',

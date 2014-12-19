@@ -18,7 +18,6 @@ var token;
 before(function(done) {
   GeneralEvents.remove({}, function(err) {
     if (err) return console.log(err);
-    console.log('db cleaned');
   });
 
   var newEvent = new GeneralEvents();
@@ -33,7 +32,6 @@ before(function(done) {
 after(function() {
   GeneralEvents.remove({}, function(err) {
     if (err) return console.log(err);
-    console.log('db cleaned');
   });
 
   User.remove({}, function(err) {

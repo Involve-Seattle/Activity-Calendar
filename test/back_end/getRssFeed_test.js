@@ -7,7 +7,7 @@ var expect = chai.expect;
 var GetRSS = require('../../lib/getRssFeed');
 
 describe('fetching the event feed', function() {
-  var getRSS
+  var getRSS;
   var mock;
 
   before(function() {
