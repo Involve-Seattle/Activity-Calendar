@@ -17,7 +17,6 @@ var authorization = 'Basic ' + new Buffer('testYourself@example.com:Test2@', 'as
 before(function(done) {
   User.remove({}, function(err) {
     if (err) return console.log(err + ' dusting');
-    console.log('db cleared');
     done();
   });
 });
@@ -25,7 +24,6 @@ before(function(done) {
 after(function(done) {
   User.remove({}, function(err) {
     if (err) return console.log(err + ' dusting');
-    console.log('db cleared');
     done();
   });
 });
