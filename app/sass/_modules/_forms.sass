@@ -10,7 +10,6 @@ input
   margin: 0 auto 0.3em auto
 
 button
-  display: block
   position: relative
   margin: 1em auto
   padding: 1em 2.5em
@@ -22,10 +21,18 @@ button
   &:active
     background-color: $color-primary--5
 
+.button--block
+  display: block
+
+.element-inline-block
+  display: inline-block
+  vertical-align: top
+
 .button--emphasis
   background-color: $color-primary--5
   font-size: 2em
   padding: 0.8em
+  display: block
   &:active
     background-color: $color-primary--4
 
@@ -33,6 +40,7 @@ button
   background-color: $color-primary--4
   font-size: 0.8em
   padding: 0.6em
+  display: block
 
 .logo--centered
   display: block
