@@ -26,7 +26,6 @@ module.exports = function(app) {
       if (newUser.password !== newUser.passwordConfirmation) return ({msg: 'password and confirmation did not match'});
       if (!newUser.email) return ({msg: 'did not specify an email'});
       if (!newUser.password) return ({msg: 'did not specify a password'});
-
       if ($scope.errors.length) return;
 
       userService.signUpService(newUser, $cookies)
