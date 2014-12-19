@@ -9,14 +9,17 @@ describe('userService', function() {
   var $httpBackend;
   var userServiceTest;
   var jwt = {jwt: '1'};
-  var newUser = {};
-  var $cookies;
+  var newUser = {
+    email: 'test@example.com',
+    password: 'Test1@'
+  };
+  var $cookies = {};
   var $rootScope;
 
   beforeEach(angular.mock.inject(function(userService, $rootScope, $cookies, _$httpBackend_) {
     userServiceTest = userService;
     $httpBackend = _$httpBackend_;
-    $cookies = {};
+    // $cookies.test = 'test';
     $rootScope = {};
   }));
 
@@ -25,35 +28,30 @@ describe('userService', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-// module(function($provide) {
-//   $provide.service('util', function() {
-//     this.isNumber = jasmine.createSpy('isNumber').andCallFake(function(num) {
-//       //a fake implementation
-//     });
-//     this.isDate = jasmine.createSpy('isDate').andCallFake(function(num) {
-//       //a fake implementation
-//     });
-//   });
-// });
+  it('should make a get request to user', function() {
+    $httpBackend.expectGET('/api/login').respond(200, jwt);
 
-//   it('should make a post request to create a new user', function(done) {
-//     newUser = {
-//       email: 'test@example.com',
-//       password: 'testtest',
-//       passwordConfirmation: 'testtest'
-//     };
-//     $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
+    userServiceTest.loginService(newUser)
+    .success(function(data) {
+      expect(data.jwt).toEqual('1');
+    });
 
-//     var promise = userServiceTest.signUp(newUser);
+    $httpBackend.flush();
+  });
 
-//     // console.log('promise' + promise);
-//     promise.success(function(data) {
-//       console.log('inside promise success');
-//       // expect($cookies.jwt).toBe('1');
-//       expect($rootScope.user.email).toBe('test@example.com');
-//     });
-//     $httpBackend.flush();
+  it('should make a post request to user', function() {
+    $httpBackend.expectPOST('/api/newUser').respond(200, jwt);
+    newUser.passwordConfirmation = newUser.password;
+    userServiceTest.signUpService(newUser, $cookies)
+    .success(function(data) {
+      expect(data.jwt).toEqual('1');
+    });
 
-//   });
+    $httpBackend.flush();
+  });
 
+  it('should log user out', function() {
+    $cookies = userServiceTest.logout();
+    expect($cookies.jwt).not.toBeDefined();
+  })
 });
