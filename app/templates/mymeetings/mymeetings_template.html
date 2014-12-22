@@ -1,1 +1,50 @@
-<p>Coming soon...</p>
+
+<div class='main-container clearfix'>
+  <div data-ng-controller='myMeetingsCtrl' data-ng-init='index()'>
+    <section class='side-box side-box--mobile-width'>
+      <figure class='city-image'></figure>
+      <h1>Seattle</h1>
+    </section>
+    <section class='main-content extra-margin-left main-content--mobile-width'>
+      <div data-ng-repeat='event in events'>
+        <div data-ng-hide='show' data-ng-click='viewLarge(myevent)'>
+          <section class='list-items bottom-border'>
+            <h1>{{myevent.eventTitle}}</h1>
+            <p>{{myevent.eventDate}}</p>
+          </section>
+        </div>
+      </div>
+      <div data-ng-show='show'> <!-- Event view start here -->
+        <div class='list-items'>
+          <h1 class='h1--no-hover'>{{mycurrentEvent.eventTitle}}</h1>
+          <!-- <p>{{event.eventContent}}</p> -->
+          <!-- <p>{{event.eventContentLong}}</p> -->
+          <h2>Address</h2>
+          <p>Council Chambers</p>
+          <p>Seattle City Hall Floor</p>
+          <p>2600 Fourth Avenue</p>
+          <p>Seattle, WA</p>
+          <p>{{myevent.eventDate}}</p>
+          <a href={{mycurrentEvent.eventUrl}}>See this event at Seattle.gov</a>
+        </div>
+        <button class='element-inline-block' data-ng-click='viewAll()'>Back</button>
+          <div class='element-inline-block extra-margin-left'>
+            <button class='element-inline-block' data-ng-click='inviteFriend = !inviteFriend'>Invite a Friend!</button>
+            <div data-ng-show='inviteFriend'>
+              <form name='invitationForm'>
+                <input type='text' placeholder='friends email' ng-model='user.friendEmail'>
+                <input type='text' placeholder='message' ng-model='user.friendMessage'>
+                <button class='button--submit' data-ng-click='invite(); inviteFriend = false'>Send Invitation</button>
+              </form>
+            </div>
+          </div>
+      </div>
+    </section>
+  </div>
+</div> <!-- closes main-container -->
+<footer>
+  <div class='site-footer'>
+    <p>A Project for Code Fellows by Jacob Shafer, Chareesa Graham, Stephanie Lingwood, Sheyna Watkins and Henok Kidane</p>
+    <p>All event details come from the government agency. INVOLVE is not responsible for errors in the information.</p>
+  </div>
+</footer>
